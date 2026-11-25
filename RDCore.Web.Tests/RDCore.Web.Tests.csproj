@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyTitle>RDCore.Web Tests</AssemblyTitle>
+    <Description>The tests of RDCore.Web.</Description>
+    <!-- a test method that does not await what it asserts passes without asserting it: an async method with no await, and a call whose task is dropped. -->
+    <WarningsAsErrors>$(WarningsAsErrors);CS1998;CS4014</WarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSTest" Version="4.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RDCore.Web\RDCore.Web.csproj" />
+    <ProjectReference Include="..\RDCore.Web.Host\RDCore.Web.Host.csproj" />
+  </ItemGroup>
+
+</Project>

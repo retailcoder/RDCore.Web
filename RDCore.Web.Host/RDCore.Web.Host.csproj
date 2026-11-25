@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <AssemblyTitle>RDCore.Web Host</AssemblyTitle>
+    <Description>The ASP.NET Core host of RDCore.Web.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RDCore.Web\RDCore.Web.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,40 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- the single version source for every project; a release tag must equal v<VersionPrefix>[-suffix], the suffix passed as -p:VersionSuffix. -->
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <!-- the RDCore.SDK package every project builds on (the RDCore.SDK.Protocol assembly is inside it): one version for all of them. A build on a package
+         that is not published passes its version and feed, as -p:RDCoreSdkVersion and -p:RestoreConfigFile. -->
+    <RDCoreSdkVersion>0.1.18-alpha</RDCoreSdkVersion>
+    <!-- the .NET RDCore.SDK targets: the latest. -->
+    <TargetFramework>net11.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- one package per repository: RDCore.Web. Every other project says so by leaving this as it is. -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <!-- what every assembly says about itself. A project states its own title and description. -->
+  <PropertyGroup>
+    <Company>9562-7303 Québec inc.</Company>
+    <Authors>$(Company)</Authors>
+    <Product>RDCore.Web</Product>
+    <Copyright>Copyright © 2026 $(Company)</Copyright>
+    <!-- the strings in a project's .resx are English; the .fr.resx beside it is the French satellite. -->
+    <NeutralLanguage>en</NeutralLanguage>
+    <!-- the licence's text is LICENSE-GPLv3.md. -->
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageProjectUrl>https://rubberduckvba.ca</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/retailcoder/RDCore.Web</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <!-- every project, its tests included, builds with no warning: a warning is an error. An advisory published against a package is a warning still, which a
+       build reports without failing - it is news of the package, not of the code built. -->
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>
+  </PropertyGroup>
+
+</Project>
