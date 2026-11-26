@@ -12,7 +12,32 @@ Ce dépôt est celui de **RDCore.Web**, le cadriciel web de [RDCore](https://git
 Le modèle du langage RD-VBA vient du paquet [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK). Ce que vous construisez avec RDCore.Web vous appartient (voir [NOTICE.md](NOTICE.md)).
 
 ## État du projet
-RDCore.Web est en cours de mise en place. Le dépôt a sa solution, sa compilation et ses tests; le cadriciel lui-même n'est pas écrit.
+RDCore.Web associe les points de terminaison d'une application à leurs routes et les sert au moyen d'ASP.NET Core. Il n'exécute pas de code RD-VBA : la machine qui exécute une procédure dans une session d'exécution RDCore, et le lecteur des annotations dans la source d'un module, sont une direction.
+
+| Partie | État |
+|---|---|
+| Les points de terminaison des annotations `'@Controller`, `'@HttpGet` et `'@HttpPost` : la méthode HTTP, la route sous celle du contrôleur, et la vérification que chaque paramètre de route nomme un paramètre de la procédure | Fonctionne, à partir du nom et de l'argument de chaque annotation. |
+| Le bassin de machines : chaque requête s'exécute seule sur une machine, et une requête qui ne trouve aucune machine libre en attend une sans retenir de fil d'exécution | Fonctionne. Un bassin d'une seule machine sert ses requêtes une à la fois. |
+| La liaison : une valeur de route ou de chaîne de requête au paramètre de la procédure qui porte son nom, comme chaîne; le corps JSON d'un `POST` au premier paramètre que sa route ne lie pas | Fonctionne. |
+| Les réponses : la valeur de la procédure en JSON (`200`), aucune valeur (`204`), une erreur d'exécution en `500` avec un corps de détails du problème (RFC 9457) qui contient le numéro et le code de l'erreur | Fonctionne. |
+| L'hôte : une page dans `wwwroot` qui appelle un point de terminaison et montre sa réponse | Fonctionne. L'hôte n'associe aucun point de terminaison. |
+
+Les annotations d'un module contrôleur :
+
+```vb
+'@Controller("api")
+Option Explicit
+
+'@HttpGet("hello/{name}")
+Public Function Hello(ByVal name As Variant) As Variant
+    Dim greeting As Object
+    Set greeting = CreateObject("Scripting.Dictionary")
+    greeting.Add "greeting", "Hello, " & name & "!"
+    Set Hello = greeting
+End Function
+```
+
+`Hello` est le point de terminaison `GET /api/hello/{name}`, et sa route lie `name`. Une machine répond avec la valeur que la fonction retourne, en JSON.
 
 ## La solution
 

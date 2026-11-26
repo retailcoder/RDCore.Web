@@ -12,7 +12,32 @@ This repository is for **RDCore.Web**, the web framework of [RDCore](https://git
 The RD-VBA language model comes from the [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK) package. What you build with RDCore.Web is yours (see [NOTICE.md](NOTICE.md)).
 
 ## Project Status
-RDCore.Web is being set up. The repository has its solution, its build and its tests; the framework itself is not written.
+RDCore.Web maps the endpoints of an application and serves them through ASP.NET Core. It does not run RD-VBA code: the machine that runs a procedure in an RDCore runtime session, and the reader of the annotations in a module's source, are a direction.
+
+| Part | Status |
+|---|---|
+| Endpoints from the `'@Controller`, `'@HttpGet` and `'@HttpPost` annotations: the HTTP method, the route under the controller's, and a check that each route parameter names a parameter of the procedure | Works, from each annotation's name and argument. |
+| The machine pool: each request runs alone on one machine, and a request that finds no idle machine waits for one without holding a thread | Works. A pool of one machine serves its requests one at a time. |
+| Binding: a route value or a query string value into the procedure's parameter of that name, as a string; the JSON body of a `POST` into the first parameter its route does not bind | Works. |
+| Responses: the procedure's value as JSON (`200`), no value (`204`), a run-time error as `500` with a problem details body (RFC 9457) that holds the error's number and code | Works. |
+| The host: a page in `wwwroot` that calls an endpoint and shows its answer | Works. The host maps no endpoint. |
+
+The annotations of a controller module:
+
+```vb
+'@Controller("api")
+Option Explicit
+
+'@HttpGet("hello/{name}")
+Public Function Hello(ByVal name As Variant) As Variant
+    Dim greeting As Object
+    Set greeting = CreateObject("Scripting.Dictionary")
+    greeting.Add "greeting", "Hello, " & name & "!"
+    Set Hello = greeting
+End Function
+```
+
+`Hello` is the endpoint `GET /api/hello/{name}`, and its route binds `name`. A machine answers with the value the function returns, as JSON.
 
 ## The solution
 
