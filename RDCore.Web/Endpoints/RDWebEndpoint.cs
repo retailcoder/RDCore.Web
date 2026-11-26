@@ -74,8 +74,9 @@ public sealed record class RDWebEndpoint
     /// starts with <c>/</c> or <c>~/</c> is from the root of the application, and the controller's route does not prefix it.
     /// </param>
     /// <param name="bodyParameter">
-    /// The argument of the procedure's <c>'@FromBody</c> annotation: the parameter the body of a <c>POST</c> binds to. <see langword="null"/> when the
-    /// procedure has none, which binds the body to the first parameter the route does not bind. A <c>GET</c> has no body, and binds none.
+    /// The argument of the procedure's <c>'@FromBody</c> annotation: the parameter the body of a <c>POST</c> binds to, matched in any case, as VBA
+    /// matches names. <see langword="null"/> when the procedure has none, which binds the body to the first parameter the route does not bind. A
+    /// <c>GET</c> has no body, and binds none.
     /// </param>
     /// <returns>The endpoint; <see langword="null"/> when the annotation is not one of an HTTP method (<see cref="RDWebAnnotations.HttpMethodOf"/>).</returns>
     /// <exception cref="RDWebEndpointException">

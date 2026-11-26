@@ -44,8 +44,8 @@ public static class RDWebEndpointReader
             var body = annotations.FirstOrDefault(annotation => Is(annotation, RDWebAnnotations.FromBody))?.GetStringArgument();
             foreach (var annotation in annotations)
             {
-                if (RDWebEndpoint.FromAnnotation(moduleName, controllerRoute, procedure.Name, parameters, annotation.Name, annotation.GetStringArgument(), body)
-                    is { } endpoint)
+                if (RDWebEndpoint.FromAnnotation(
+                    moduleName, controllerRoute, procedure.Name, parameters, annotation.Name, annotation.GetStringArgument(), body) is { } endpoint)
                 {
                     endpoints.Add(endpoint);
                 }
