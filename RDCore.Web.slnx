@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".github/workflows/build.yml" />
+    <File Path="Directory.Build.props" />
+    <File Path="NOTICE.md" />
+    <File Path="README.fr.md" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="RDCore.Web.Host/RDCore.Web.Host.csproj" />
+  <Project Path="RDCore.Web.Tests/RDCore.Web.Tests.csproj" />
+  <Project Path="RDCore.Web/RDCore.Web.csproj" />
+</Solution>

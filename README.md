@@ -1,2 +1,54 @@
 # RDCore.Web
-Run VBScript on RDCore
+<sup>_Ce document est disponible en [français](./README.fr.md)_</sup>
+
+![VIVAT CUCUMIS](./assets/vivat-cucumis-stonecore.png)
+
+## Before we begin.
+> 👋 Hi! New here? _Rubberduck_ was always an open-source initiative. **RDCore honors it with an Open-Core formula**.  
+> <small>See [rubberduckvba.ca](https://rubberduckvba.ca) for more information.</small>
+
+This repository is for **RDCore.Web**, the web framework of [RDCore](https://github.com/rubberduck-vba/RDCore), under **⚖️GPLv3 or later**. RDCore.Web serves the class modules of an RD-VBA project through ASP.NET Core. Rubberduck annotations such as `'@Controller`, `'@HttpGet` and `'@Authorize` describe the endpoints, and the frontend can be any Node.js app.
+
+The RD-VBA language model comes from the [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK) package. What you build with RDCore.Web is yours (see [NOTICE.md](NOTICE.md)).
+
+## Project Status
+RDCore.Web is being set up. The repository has its solution, its build and its tests; the framework itself is not written.
+
+## The solution
+
+| Project | What it is |
+|---|---|
+| `RDCore.Web` | The framework library, and the repository's NuGet package. It builds on RDCore.SDK and ASP.NET Core. |
+| `RDCore.Web.Host` | The ASP.NET Core host that serves an application. |
+| `RDCore.Web.Tests` | The tests (MSTest). |
+
+## Building from source
+
+With the [.NET 11 SDK](https://dotnet.microsoft.com/download/dotnet/11.0), from the repository root:
+
+```powershell
+dotnet build RDCore.Web.slnx
+dotnet test RDCore.Web.slnx
+```
+
+The RDCore.SDK package comes from nuget.org, at the version that `Directory.Build.props` sets (`RDCoreSdkVersion`). A build on a package that is not published passes its version and its feed, as `-p:RDCoreSdkVersion` and `-p:RestoreConfigFile`.
+
+## License
+RDCore.Web is licensed under the GNU General Public License, version 3 or any later version: see [LICENSE-GPLv3.md](LICENSE-GPLv3.md). The license file reproduces the official text, in English. A French version of the license is available on request. [NOTICE.md](NOTICE.md) covers the applications built with RDCore.Web and the RDCore.SDK package.
+
+---
+### See also
+- [RDCore](https://github.com/rubberduck-vba/RDCore)
+- [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK)
+- [RDCore.VSCode](https://github.com/rubberduck-vba/RDCore.VSCode)
+
+<hr/>
+<p align='left' style='margin-left: 32px;'>
+<a href='https://rubberduck-vba.github.io/RDCore/index.fr.html'>ACCUEIL</a> • <a href='https://rubberduck-vba.github.io/RDCore/index.html'>HOME</a>  | ℹ️ <a href='https://rubberduck-vba.github.io/RDCore/introduction.fr.html'>BIENVENUE</a> • <a href='https://rubberduck-vba.github.io/RDCore/introduction.html'>WELCOME</a>  | 🧩 <a href='https://rubberduck-vba.github.io/RDCore/getting-started.fr.html'>BÂTISSONS</a> • <a href='https://rubberduck-vba.github.io/RDCore/getting-started.html'>BUILD</a>  | <a href='https://rubberduck-vba.github.io/RDCore/specs/rd-vbal.html'><strong>RD-VBAL</strong></a>  |  <a href='https://rubberduck-vba.github.io/RDCore/api/RDCore.SDK.Model.Errors.VBCompileErrorId.html'>SDK</a>  | 🌐 <a href='https://rubberduckvba.ca'>rubberduckvba.ca</a>
+</p>
+<hr/>
+<p align='center'><img alt='Logo™ 9562-7303 Québec inc.' src='./assets/ducky.png' style='width:200px; align:center;' /></p>
+<h6 align='center'>V I V A T ❤️ C U C U M I S ™</h6>
+<p align='center' style='font-size:8pt;'>
+<small>© Copyright <strong>9562-7303 Québec inc.</strong> (2026)<br/><em>Seul, &quot;Rubberduck&quot; est utilisé pour fins de référence au projet open-source legacy <strong>utilisé publiquement ainsi depuis 2015</strong> et sans lien ni affiliation avec tout tiers détenteur d'une marque semblable dans quelque juridiction que ce soit.<br/>&quot;Rubberduck VBA&quot;, &quot;RDCore&quot; et &quot;VIVAT CUCUMIS&quot; sont des marques de commerce revendiquées par 9562-7303 Québec inc. (en attente); Toutes les marques appartiennent à leur détenteur respectif.<br/>RDCore n'est pas un produit de Microsoft et n'est pas affilié à Microsoft, ni directement, ni indirectement.<br/><br/>If used alone, <em>&quot;Rubberduck&quot; is used as a reference to the legacy open-source project <strong>the same way it has been used publicly since 2015</strong> and without any links or affiliation with any third-party trademark holders of a similar trademark in any jurdisdiction.<br/>&quot;Rubberduck VBA&quot;, &quot;RDCore&quot; and &quot;VIVAT CUCUMIS&quot; are trademarks claimed by 9562-7303 Québec inc. (pending). All trademarks belong to their respective owners.<br/>RDCore is not a Microsoft product and is not affiliated with Microsoft, directly or indirectly.</small>
+</p>

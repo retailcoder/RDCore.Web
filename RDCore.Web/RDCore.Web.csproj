@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyTitle>RDCore.Web</AssemblyTitle>
+    <Description>Serves RD-VBA class modules as ASP.NET Core endpoints.</Description>
+    <!-- the package of this repository. -->
+    <IsPackable>true</IsPackable>
+    <PackageId>RDCore.Web</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="RDCore.SDK" Version="$(RDCoreSdkVersion)" />
+  </ItemGroup>
+
+</Project>

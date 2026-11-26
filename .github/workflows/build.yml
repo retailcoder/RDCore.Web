@@ -1,0 +1,61 @@
+name: Build and Test
+
+on:
+ push:
+  branches: [main]
+ pull_request:
+  branches: [main]
+
+permissions:
+ contents: read
+
+jobs:
+ build-and-test:
+  runs-on: ubuntu-latest
+  timeout-minutes: 20
+
+  steps:
+   - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+     with:
+      persist-credentials: false
+
+   - name: Setup .NET
+     uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+     with:
+      dotnet-version: 11.0
+
+   - name: Build (Debug)
+     run: dotnet build RDCore.Web.slnx --configuration Debug
+
+   - name: Test (Debug)
+     run: dotnet test RDCore.Web.slnx --configuration Debug --no-build --verbosity normal --blame-hang-timeout 10m
+
+   - name: Build (Release)
+     run: dotnet build RDCore.Web.slnx --configuration Release
+
+   - name: Test (Release)
+     run: dotnet test RDCore.Web.slnx --configuration Release --no-build --verbosity normal --blame-hang-timeout 10m
+
+   # one package per repository: packing the solution makes exactly one, RDCore.Web. A prerelease suffix, as a release tag has, since the package
+   # depends on a prerelease RDCore.SDK.
+   - name: Pack
+     run: |
+       dotnet pack RDCore.Web.slnx --configuration Release --no-build -p:VersionSuffix=ci -o packages
+       ls packages
+       count=$(find packages -name '*.nupkg' | wc -l)
+       if [ "$count" -ne 1 ] || [ ! -f packages/RDCore.Web.*-ci.nupkg ]; then
+         echo "::error::The solution packs $count package(s); the repository has one, RDCore.Web."
+         exit 1
+       fi
+
+   # what --blame-hang-timeout leaves when a test hangs: the sequence file and the dumps of the test host.
+   - name: Upload what a hang leaves
+     if: failure()
+     uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+     with:
+      name: blame-ubuntu-latest
+      path: |
+       **/TestResults/**/Sequence_*.xml
+       **/TestResults/**/*.dmp
+      if-no-files-found: ignore
+      retention-days: 3
