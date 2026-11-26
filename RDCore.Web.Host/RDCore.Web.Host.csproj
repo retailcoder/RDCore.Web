@@ -9,4 +9,9 @@
     <ProjectReference Include="..\RDCore.Web\RDCore.Web.csproj" />
   </ItemGroup>
 
+  <!-- the build output holds wwwroot as a publish does, so that an application whose content root is its output folder serves it: the tests' does. -->
+  <ItemGroup>
+    <Content Update="wwwroot\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
