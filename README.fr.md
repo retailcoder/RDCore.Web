@@ -37,7 +37,7 @@ Public Function Hello(ByVal name As Variant) As Variant
 End Function
 ```
 
-`Hello` est le point de terminaison `GET /api/hello/{name}`, et sa route lie `name`. Une machine répond avec la valeur que la fonction retourne, en JSON.
+`Hello` est le point de terminaison `GET /api/hello/{name}`, et sa route lie `name`. Pour l'exécuter et répondre avec son `Dictionary` en objet JSON, il faut une machine, qui fait partie de la direction décrite plus haut.
 
 ## La solution
 
