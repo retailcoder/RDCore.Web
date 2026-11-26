@@ -8,7 +8,7 @@ Ce fichier accompagne le code source de RDCore.Web.
 ## Licences
 
 - ⚖️ **GPLv3 ou toute version ultérieure** — voir [LICENSE-GPLv3.md](LICENSE-GPLv3.md) : **RDCore.Web**, soit tout le code source de ce référentiel et, dans ce qu'une compilation en produit, la bibliothèque RDCore.Web et son hôte ASP.NET Core (RDCore.Web.Host).
-- ⚖️ **RDCore.SDK** — ce qu'une compilation produit contient aussi `RDCore.SDK.dll` et `RDCore.SDK.Protocol.dll`, avec leurs _assemblies_ satellites françaises `fr/RDCore.SDK.resources.dll` et `fr/RDCore.SDK.Protocol.resources.dll`. Ils proviennent du paquet NuGet **RDCore.SDK**, publié sous licence **MIT** à partir de [rubberduck-vba/RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK).
+- ⚖️ **RDCore.SDK** — ce qu'une compilation produit contient aussi `RDCore.SDK.dll` et `RDCore.SDK.Protocols.dll`, avec leurs _assemblies_ satellites françaises `fr/RDCore.SDK.resources.dll` et `fr/RDCore.SDK.Protocols.resources.dll`. Ils proviennent des paquets NuGet **RDCore.SDK** et **RDCore.SDK.Protocols**, publiés sous licence **MIT** à partir de [rubberduck-vba/RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK) et de [rubberduck-vba/RDCore.SDK.Protocols](https://github.com/rubberduck-vba/RDCore.SDK.Protocols).
 
 Le fichier de licence reproduit le texte officiel de la licence, en anglais. Une version française de cette licence est disponible sur demande.
 
@@ -37,7 +37,7 @@ This file accompanies the RDCore.Web source code.
 ## Licences
 
 - ⚖️ **GPLv3 or later** — see [LICENSE-GPLv3.md](LICENSE-GPLv3.md): **RDCore.Web**, that is all the source code in this repository and, in what a build of it produces, the RDCore.Web library and its ASP.NET Core host (RDCore.Web.Host).
-- ⚖️ **RDCore.SDK** — what a build produces also contains `RDCore.SDK.dll` and `RDCore.SDK.Protocol.dll`, with their French satellite assemblies `fr/RDCore.SDK.resources.dll` and `fr/RDCore.SDK.Protocol.resources.dll`. They come from the **RDCore.SDK** NuGet package, published under the **MIT** licence from [rubberduck-vba/RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK).
+- ⚖️ **RDCore.SDK** — what a build produces also contains `RDCore.SDK.dll` and `RDCore.SDK.Protocols.dll`, with their French satellite assemblies `fr/RDCore.SDK.resources.dll` and `fr/RDCore.SDK.Protocols.resources.dll`. They come from the **RDCore.SDK** and **RDCore.SDK.Protocols** NuGet packages, published under the **MIT** licence from [rubberduck-vba/RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK) and [rubberduck-vba/RDCore.SDK.Protocols](https://github.com/rubberduck-vba/RDCore.SDK.Protocols).
 
 The licence file reproduces the official text of the licence, in English. A French version of this licence is available on request.
 
