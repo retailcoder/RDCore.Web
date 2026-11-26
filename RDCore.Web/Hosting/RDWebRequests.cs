@@ -51,7 +51,8 @@ internal static class RDWebRequests
             }
         }
 
-        var result = await machine.InvokeAsync(new RDWebInvocation(endpoint.ModuleName, endpoint.ProcedureName, arguments.ToImmutable()), context.RequestAborted);
+        var invocation = new RDWebInvocation(endpoint.ModuleName, endpoint.ProcedureName, arguments.ToImmutable());
+        var result = await machine.InvokeAsync(invocation, context.RequestAborted);
         await ResponseOf(endpoint, result).ExecuteAsync(context);
     }
 

@@ -103,7 +103,8 @@ public sealed class RDWebEndpointsHostingTests
         var machine = new ScriptedMachine(_ => RDWebInvocationResult.Returned(JsonValue.Create(1)));
         await using var app = await StartAsync(machine, Endpoint(RDWebAnnotations.HttpPost, "{id}/lines", "id", "line"));
 
-        using var response = await app.Client.PostAsync("api/orders/7/lines", Json("""{ "item": "duck", "quantity": 3, "gift": true }"""), TestContext.CancellationToken);
+        var posted = Json("""{ "item": "duck", "quantity": 3, "gift": true }""");
+        using var response = await app.Client.PostAsync("api/orders/7/lines", posted, TestContext.CancellationToken);
 
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         var arguments = machine.Invocations.Single().Arguments;
@@ -133,7 +134,8 @@ public sealed class RDWebEndpointsHostingTests
         var machine = new ScriptedMachine(_ => RDWebInvocationResult.Completed());
         await using var app = await StartAsync(machine, Endpoint(RDWebAnnotations.HttpPost, "lines", "line"));
 
-        using var response = await app.Client.PostAsync("api/orders/lines", new StringContent("item=duck", Encoding.UTF8, "text/plain"), TestContext.CancellationToken);
+        var text = new StringContent("item=duck", Encoding.UTF8, "text/plain");
+        using var response = await app.Client.PostAsync("api/orders/lines", text, TestContext.CancellationToken);
 
         Assert.AreEqual(HttpStatusCode.UnsupportedMediaType, response.StatusCode);
         Assert.IsEmpty(machine.Invocations);
@@ -203,6 +205,7 @@ public sealed class RDWebEndpointsHostingTests
 
         var answers = await Task.WhenAll(Enumerable.Range(0, 8).Select(_ => app.Client.GetStringAsync("api/orders/next", TestContext.CancellationToken)));
 
-        CollectionAssert.AreEquivalent(Enumerable.Range(1, 8).Select(number => number.ToString(System.Globalization.CultureInfo.InvariantCulture)).ToArray(), answers);
+        var numbers = Enumerable.Range(1, 8).Select(number => number.ToString(System.Globalization.CultureInfo.InvariantCulture)).ToArray();
+        CollectionAssert.AreEquivalent(numbers, answers);
     }
 }
