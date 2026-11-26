@@ -5,6 +5,7 @@ using RDCore.SDK.Model.AST.Declarations;
 using RDCore.SDK.Model.AST.Expressions;
 using RDCore.SDK.Model.Source;
 using RDCore.SDK.Model.Values.Intrinsic;
+using RDCore.SDK.Workspace;
 using RDCore.Web.Endpoints;
 
 namespace RDCore.Web.Tests.Endpoints;
@@ -115,5 +116,36 @@ public sealed class RDWebEndpointReaderTests
         var routes = endpoints.Select(endpoint => $"{endpoint.HttpMethod} {endpoint.Route}").ToArray();
         CollectionAssert.AreEqual(new[] { "GET /api/hello/{name}", "POST /api/hello" }, routes);
         Assert.AreEqual("name", endpoints[1].BodyParameter);
+    }
+
+    [TestMethod]
+    public void InAFileOfBlocks_AControllerAnnotationAboveABlocksHeader_MakesThatBlocksModuleAController()
+    {
+        // 0-1 above Greetings' header; 2 the header; 3 above Hello; 4-6 Hello; 7 the end. 8 Other's header; 9 above Bye; 10-11 Bye; 12 the end.
+        BlockModule Block(string name, int header, int end, params SyntaxNode[] children)
+            => new(name, ModuleType.StdModule, RDCoreDocument.BlockUri(File, name), new SourceRange(header, 0, end, 10),
+                new ModuleNode(Id(), Lines(header + 1, end), [.. children]));
+        BlockBoundaryTriviaNode Boundary(int line, bool isEnd) => new(Id(), Lines(line, line), FileBlockKind.Module, isEnd, "Module");
+
+        var greetings = Block("Greetings", 2, 7, Procedure("Hello", 4, 6));
+        var other = Block("Other", 8, 12, Procedure("Bye", 10, 11));
+        var parse = new ModuleParseResult
+        {
+            SyntaxTree = new ModuleNode(Id(), Lines(0, 12), []),
+            Trivia =
+            [
+                .. Annotated(0, RDWebAnnotations.Controller, "api"), .. Annotated(1, RDWebAnnotations.HttpGet, "above"), Boundary(2, false),
+                .. Annotated(3, RDWebAnnotations.HttpGet, "hello"), Boundary(7, true),
+                Boundary(8, false), .. Annotated(9, RDWebAnnotations.HttpGet, "bye"), Boundary(12, true),
+            ],
+            BlockModules = [greetings, other],
+        };
+        var document = new RDCoreDocument(File, parse);
+
+        var endpoint = RDWebEndpointReader.Read(document.ParseOf(greetings.Uri)!, "Greetings").Single();
+
+        Assert.AreEqual("GET /api/hello", $"{endpoint.HttpMethod} {endpoint.Route}", "an annotation above the header is no member's");
+        Assert.IsEmpty(RDWebEndpointReader.Read(document.ParseOf(other.Uri)!, "Other"), "the controller is the block's below it only");
+        Assert.IsEmpty(RDWebEndpointReader.Read(document.ParseOf(File)!, "Greetings"));
     }
 }

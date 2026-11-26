@@ -7,15 +7,18 @@ using System.Collections.Immutable;
 namespace RDCore.Web.Endpoints;
 
 /// <summary>
-/// Reads the endpoints a module declares from its annotations: <c>'@Controller</c> in its declarations section, and <c>'@HttpGet</c> or <c>'@HttpPost</c>
-/// immediately above each public <c>Sub</c> or <c>Function</c> that serves one.
+/// Reads the endpoints a module declares from its annotations: <c>'@Controller</c> in its declarations section, or above the header of its block
+/// (<c>Module Name</c>, <c>Class Name</c>) for the module of a block of a file, and <c>'@HttpGet</c> or <c>'@HttpPost</c> immediately above each public
+/// <c>Sub</c> or <c>Function</c> that serves one.
 /// </summary>
 public static class RDWebEndpointReader
 {
     /// <summary>
     /// The endpoints a module declares.
     /// </summary>
-    /// <param name="parse">The module's parse; for a file that has blocks, the parse of the one module.</param>
+    /// <param name="parse">
+    /// The module's parse; for a file that has blocks, the parse of the one module (<see cref="SDK.Workspace.RDCoreDocument.ParseOf"/>).
+    /// </param>
     /// <param name="moduleName">The module's name.</param>
     /// <returns>
     /// One endpoint for each HTTP method annotation of each public procedure, in the order they are written; none for a module that is not a controller. A
