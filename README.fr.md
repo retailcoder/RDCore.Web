@@ -12,7 +12,7 @@ Ce dépôt est celui de **RDCore.Web**, le cadriciel web de [RDCore](https://git
 Le modèle du langage RD-VBA vient du paquet [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK). Ce que vous construisez avec RDCore.Web vous appartient (voir [NOTICE.md](NOTICE.md)).
 
 ## État du projet
-RDCore.Web associe les points de terminaison d'une application à leurs routes et les sert au moyen d'ASP.NET Core. Il n'exécute pas de code RD-VBA : la machine qui exécute une procédure dans une session d'exécution RDCore, et le lecteur des annotations dans la source d'un module, sont une direction.
+RDCore.Web associe les points de terminaison d'une application à leurs routes et les sert au moyen d'ASP.NET Core. Il lit les points de terminaison dans les annotations de la source d'un module. Il n'exécute pas de code RD-VBA : aucune machine du bassin n'exécute une procédure dans une session d'exécution RDCore.
 
 | Partie | État |
 |---|---|
@@ -38,7 +38,7 @@ Public Function Hello(ByVal name As Variant) As Variant
 End Function
 ```
 
-`Hello` est le point de terminaison `GET /api/hello/{name}`, et sa route lie `name`. Pour l'exécuter et répondre avec son `Dictionary` en objet JSON, il faut une machine, qui fait partie de la direction décrite plus haut.
+`Hello` est le point de terminaison `GET /api/hello/{name}`, et sa route lie `name`. Pour l'exécuter et répondre avec son `Dictionary` en objet JSON, il faut une machine qui exécute du code RD-VBA, ce que RDCore.Web n'a pas.
 
 ## La solution
 

@@ -12,7 +12,7 @@ This repository is for **RDCore.Web**, the web framework of [RDCore](https://git
 The RD-VBA language model comes from the [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK) package. What you build with RDCore.Web is yours (see [NOTICE.md](NOTICE.md)).
 
 ## Project Status
-RDCore.Web maps the endpoints of an application and serves them through ASP.NET Core. It does not run RD-VBA code: the machine that runs a procedure in an RDCore runtime session, and the reader of the annotations in a module's source, are a direction.
+RDCore.Web maps the endpoints of an application and serves them through ASP.NET Core. It reads the endpoints from the annotations in a module's source. It does not run RD-VBA code: no machine of the pool runs a procedure in an RDCore runtime session.
 
 | Part | Status |
 |---|---|
@@ -38,7 +38,7 @@ Public Function Hello(ByVal name As Variant) As Variant
 End Function
 ```
 
-`Hello` is the endpoint `GET /api/hello/{name}`, and its route binds `name`. Running it, and answering with its `Dictionary` as a JSON object, take a machine, which is part of the direction above.
+`Hello` is the endpoint `GET /api/hello/{name}`, and its route binds `name`. Running it, and answering with its `Dictionary` as a JSON object, take a machine that runs RD-VBA code, which RDCore.Web does not have.
 
 ## The solution
 

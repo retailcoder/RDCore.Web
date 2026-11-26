@@ -8,6 +8,7 @@ discovers the extension by that manifest, and loads it when "RDCore.Web" is in i
 nothing may change the executable after this script runs.
 
 The platform's rdc describes the extension, through the dotnet host (`dotnet rdc.dll`), so a tree published for another system is described the same way.
+It describes it as an unsigned local build (`--unsafe-dev-mode`), as PlatformPublish.ps1 does for the extensions it publishes.
 The platform is built on an RDCore.SDK at least as recent as the one RDCore.Web is built on.
 
 .PARAMETER PlatformRoot

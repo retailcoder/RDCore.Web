@@ -52,6 +52,6 @@
     <value>Nommer le paramètre de corps : '@FromBody("{0}")</value>
   </data>
   <data name="SeveralBodyParameters_Message" xml:space="preserve">
-    <value>'{0}' est lié par la chaîne de requête : le corps de la requête de {2} n'est lié qu'à '{1}'.</value>
+    <value>'{0}' prend sa valeur dans la chaîne de requête : le corps de la requête de {2} n'est lié qu'à '{1}'.</value>
   </data>
 </root>
