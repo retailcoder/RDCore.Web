@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Endpoint_InvalidRoute" xml:space="preserve">
+    <value>La route '{0}' de {1}.{2} n'est pas un modèle de route valide : {3}</value>
+  </data>
+  <data name="Endpoint_RouteParameterIsNoParameter" xml:space="preserve">
+    <value>Le paramètre de route '{0}' de {1}.{2} n'est pas un paramètre de la procédure.</value>
+  </data>
+  <data name="Pool_NoMachine" xml:space="preserve">
+    <value>Un bassin de machines contient au moins une machine.</value>
+  </data>
+  <data name="Request_BodyIsNotJson" xml:space="preserve">
+    <value>Le corps de la requête n'est pas du JSON valide.</value>
+  </data>
+  <data name="Request_BodyMustBeJson" xml:space="preserve">
+    <value>Le corps de la requête de ce point de terminaison est du JSON (application/json).</value>
+  </data>
+  <data name="Problem_RuntimeError" xml:space="preserve">
+    <value>Erreur d'exécution '{0}'</value>
+  </data>
+  <data name="Problem_NotFound" xml:space="preserve">
+    <value>Il n'y a aucune procédure {0}.{1} à invoquer.</value>
+  </data>
+  <data name="Problem_Refused" xml:space="preserve">
+    <value>La machine a refusé la requête.</value>
+  </data>
+  <data name="Problem_DidNotComplete" xml:space="preserve">
+    <value>La procédure {0}.{1} ne s'est pas terminée ({2}).</value>
+  </data>
+</root>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Endpoint_InvalidRoute" xml:space="preserve">
+    <value>The route '{0}' of {1}.{2} is not a valid route template: {3}</value>
+  </data>
+  <data name="Endpoint_RouteParameterIsNoParameter" xml:space="preserve">
+    <value>The route parameter '{0}' of {1}.{2} is not a parameter of the procedure.</value>
+  </data>
+  <data name="Pool_NoMachine" xml:space="preserve">
+    <value>A machine pool holds at least one machine.</value>
+  </data>
+  <data name="Request_BodyIsNotJson" xml:space="preserve">
+    <value>The request body is not valid JSON.</value>
+  </data>
+  <data name="Request_BodyMustBeJson" xml:space="preserve">
+    <value>The request body of this endpoint is JSON (application/json).</value>
+  </data>
+  <data name="Problem_RuntimeError" xml:space="preserve">
+    <value>Run-time error '{0}'</value>
+  </data>
+  <data name="Problem_NotFound" xml:space="preserve">
+    <value>There is no procedure {0}.{1} to invoke.</value>
+  </data>
+  <data name="Problem_Refused" xml:space="preserve">
+    <value>The machine refused the request.</value>
+  </data>
+  <data name="Problem_DidNotComplete" xml:space="preserve">
+    <value>The procedure {0}.{1} did not complete ({2}).</value>
+  </data>
+</root>
