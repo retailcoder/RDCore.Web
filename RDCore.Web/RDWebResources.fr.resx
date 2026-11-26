@@ -18,6 +18,12 @@
   <data name="Endpoint_RouteParameterIsNoParameter" xml:space="preserve">
     <value>Le paramètre de route '{0}' de {1}.{2} n'est pas un paramètre de la procédure.</value>
   </data>
+  <data name="Endpoint_BodyIsNoParameter" xml:space="preserve">
+    <value>Le paramètre de corps '{0}' que '@FromBody nomme pour {1}.{2} n'est pas un paramètre de la procédure.</value>
+  </data>
+  <data name="Endpoint_BodyIsRouteParameter" xml:space="preserve">
+    <value>Le paramètre de corps '{0}' que '@FromBody nomme pour {1}.{2} est lié par la route.</value>
+  </data>
   <data name="Pool_NoMachine" xml:space="preserve">
     <value>Un bassin de machines contient au moins une machine.</value>
   </data>

@@ -119,6 +119,21 @@ public sealed class RDWebEndpointReaderTests
     }
 
     [TestMethod]
+    public void AFromBodyAnnotationOfAProcedure_NamesTheBodyParameterOfItsPost_AndItsGetBindsNone()
+    {
+        var parse = Parse([Procedure("Save", 5, 8, parameters: ["id", "notify", "order"])],
+            Annotated(0, RDWebAnnotations.Controller, "api"),
+            Annotated(2, RDWebAnnotations.HttpGet, "orders/{id}"),
+            Annotated(3, RDWebAnnotations.HttpPost, "orders/{id}"),
+            Annotated(4, RDWebAnnotations.FromBody, "order"));
+
+        var endpoints = RDWebEndpointReader.Read(parse, "Orders");
+
+        Assert.IsNull(endpoints[0].BodyParameter);
+        Assert.AreEqual("order", endpoints[1].BodyParameter, "without '@FromBody, the body binds notify, the first parameter the route does not bind");
+    }
+
+    [TestMethod]
     public void InAFileOfBlocks_AControllerAnnotationAboveABlocksHeader_MakesThatBlocksModuleAController()
     {
         // 0-1 above Greetings' header; 2 the header; 3 above Hello; 4-6 Hello; 7 the end. 8 Other's header; 9 above Bye; 10-11 Bye; 12 the end.
