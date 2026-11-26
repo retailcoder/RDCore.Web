@@ -25,7 +25,9 @@ public sealed class RDWebEndpointReaderTests
 
     private static MemberDeclarationNode Procedure(string name, int first, int last, MemberKind kind = MemberKind.Function,
         AccessModifier access = AccessModifier.Public, params string[] parameters)
-        => new(Id(), Lines(first, last), [.. parameters.Select(parameter => new ParameterDeclarationNode(Id(), Lines(first, first), parameter))], name, kind, access);
+        => new(Id(), Lines(first, last), [.. parameters.Select(Parameter)], name, kind, access);
+
+    private static ParameterDeclarationNode Parameter(string name) => new(Id(), Lines(0, 0), name);
 
     // a comment line that holds one annotation, as the parser keeps it: the comment, then the annotation inside its range.
     private static SyntaxNode[] Annotated(int line, string name, string? route = null)
@@ -40,7 +42,8 @@ public sealed class RDWebEndpointReaderTests
     [TestMethod]
     public void AnHttpGetProcedureOfAController_IsAnEndpoint_OnTheControllersRouteAndItsOwn()
     {
-        var parse = Parse([Procedure("Hello", 3, 6, parameters: "name")], Annotated(0, RDWebAnnotations.Controller, "api"), Annotated(2, RDWebAnnotations.HttpGet, "hello/{name}"));
+        var parse = Parse([Procedure("Hello", 3, 6, parameters: "name")],
+            Annotated(0, RDWebAnnotations.Controller, "api"), Annotated(2, RDWebAnnotations.HttpGet, "hello/{name}"));
 
         var endpoint = RDWebEndpointReader.Read(parse, "Greetings").Single();
 
@@ -71,7 +74,9 @@ public sealed class RDWebEndpointReaderTests
     public void AControllerAnnotationAfterTheFirstProcedure_DoesNotMakeTheModuleAController()
     {
         var parse = Parse([Procedure("Hello", 1, 3), Procedure("Goodbye", 6, 8)],
-            Annotated(0, RDWebAnnotations.HttpGet, "hello"), Annotated(4, RDWebAnnotations.Controller, "api"), Annotated(5, RDWebAnnotations.HttpGet, "goodbye"));
+            Annotated(0, RDWebAnnotations.HttpGet, "hello"),
+            Annotated(4, RDWebAnnotations.Controller, "api"),
+            Annotated(5, RDWebAnnotations.HttpGet, "goodbye"));
 
         Assert.IsEmpty(RDWebEndpointReader.Read(parse, "Greetings"));
     }
@@ -81,7 +86,8 @@ public sealed class RDWebEndpointReaderTests
     [DataRow(AccessModifier.Friend)]
     public void AProcedureThatIsNotPublic_ServesNoEndpoint(AccessModifier access)
     {
-        var parse = Parse([Procedure("Hello", 3, 6, access: access)], Annotated(0, RDWebAnnotations.Controller, "api"), Annotated(2, RDWebAnnotations.HttpGet, "hello"));
+        var parse = Parse([Procedure("Hello", 3, 6, access: access)],
+            Annotated(0, RDWebAnnotations.Controller, "api"), Annotated(2, RDWebAnnotations.HttpGet, "hello"));
 
         Assert.IsEmpty(RDWebEndpointReader.Read(parse, "Greetings"));
     }
@@ -106,7 +112,8 @@ public sealed class RDWebEndpointReaderTests
 
         var endpoints = RDWebEndpointReader.Read(parse, "Greetings");
 
-        CollectionAssert.AreEqual(new[] { "GET /api/hello/{name}", "POST /api/hello" }, endpoints.Select(endpoint => $"{endpoint.HttpMethod} {endpoint.Route}").ToArray());
+        var routes = endpoints.Select(endpoint => $"{endpoint.HttpMethod} {endpoint.Route}").ToArray();
+        CollectionAssert.AreEqual(new[] { "GET /api/hello/{name}", "POST /api/hello" }, routes);
         Assert.AreEqual("name", endpoints[1].BodyParameter);
     }
 }

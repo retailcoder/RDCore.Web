@@ -21,7 +21,9 @@ public static class RDWebEndpointReader
     /// One endpoint for each HTTP method annotation of each public procedure, in the order they are written; none for a module that is not a controller. A
     /// <c>Private</c> or <c>Friend</c> procedure serves no endpoint.
     /// </returns>
-    /// <exception cref="RDWebEndpointException">An annotation declares an endpoint that cannot be served (<see cref="RDWebEndpoint.FromAnnotation"/>).</exception>
+    /// <exception cref="RDWebEndpointException">
+    /// An annotation declares an endpoint that cannot be served (<see cref="RDWebEndpoint.FromAnnotation"/>).
+    /// </exception>
     public static ImmutableArray<RDWebEndpoint> Read(ModuleParseResult parse, string moduleName)
     {
         if (parse.SyntaxTree is not { } module
