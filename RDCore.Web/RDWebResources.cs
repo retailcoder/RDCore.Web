@@ -21,4 +21,7 @@ internal static class RDWebResources
     public static string Problem_NotFound => Get(nameof(Problem_NotFound));
     public static string Problem_Refused => Get(nameof(Problem_Refused));
     public static string Problem_DidNotComplete => Get(nameof(Problem_DidNotComplete));
+    public static string ImplicitBodyBinding_Message => Get(nameof(ImplicitBodyBinding_Message));
+    public static string ImplicitBodyBinding_Fix => Get(nameof(ImplicitBodyBinding_Fix));
+    public static string SeveralBodyParameters_Message => Get(nameof(SeveralBodyParameters_Message));
 }

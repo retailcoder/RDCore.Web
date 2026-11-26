@@ -45,4 +45,13 @@
   <data name="Problem_DidNotComplete" xml:space="preserve">
     <value>La procédure {0}.{1} ne s'est pas terminée ({2}).</value>
   </data>
+  <data name="ImplicitBodyBinding_Message" xml:space="preserve">
+    <value>Le corps de la requête de {1} est lié à '{0}' parce que c'est le premier paramètre que la route ne lie pas.</value>
+  </data>
+  <data name="ImplicitBodyBinding_Fix" xml:space="preserve">
+    <value>Nommer le paramètre de corps : '@FromBody("{0}")</value>
+  </data>
+  <data name="SeveralBodyParameters_Message" xml:space="preserve">
+    <value>'{0}' est lié par la chaîne de requête : le corps de la requête de {2} n'est lié qu'à '{1}'.</value>
+  </data>
 </root>

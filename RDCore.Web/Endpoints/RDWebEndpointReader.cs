@@ -28,31 +28,29 @@ public static class RDWebEndpointReader
     /// An annotation declares an endpoint that cannot be served (<see cref="RDWebEndpoint.FromAnnotation"/>).
     /// </exception>
     public static ImmutableArray<RDWebEndpoint> Read(ModuleParseResult parse, string moduleName)
+        => [.. Actions(parse, moduleName).SelectMany(action => action.Annotations.Select(action.EndpointOf))];
+
+    // each public procedure of a controller module that an HTTP method annotation serves, in the order they are written; none for a module that is not a
+    // controller. What the host serves and what the diagnostics say of an action are both read here.
+    internal static IEnumerable<RDWebAction> Actions(ModuleParseResult parse, string moduleName)
     {
         if (parse.SyntaxTree is not { } module
             || parse.GetModuleAnnotations().FirstOrDefault(annotation => Is(annotation, RDWebAnnotations.Controller)) is not { } controller)
         {
-            return [];
+            yield break;
         }
 
         var controllerRoute = controller.GetStringArgument();
-        var endpoints = ImmutableArray.CreateBuilder<RDWebEndpoint>();
         foreach (var procedure in module.Children.OfType<MemberDeclarationNode>().Where(IsPublicProcedure))
         {
-            var parameters = procedure.Children.OfType<ParameterDeclarationNode>().Select(parameter => parameter.Name).ToArray();
             var annotations = parse.GetAnnotations(procedure);
-            var body = annotations.FirstOrDefault(annotation => Is(annotation, RDWebAnnotations.FromBody))?.GetStringArgument();
-            foreach (var annotation in annotations)
+            var methods = annotations.Where(annotation => RDWebAnnotations.HttpMethodOf(annotation.Name) is not null).ToImmutableArray();
+            if (methods.Length > 0)
             {
-                if (RDWebEndpoint.FromAnnotation(moduleName, controllerRoute, procedure.Name, parameters, annotation.Name, annotation.GetStringArgument(), body)
-                    is { } endpoint)
-                {
-                    endpoints.Add(endpoint);
-                }
+                var body = annotations.FirstOrDefault(annotation => Is(annotation, RDWebAnnotations.FromBody))?.GetStringArgument();
+                yield return new RDWebAction(moduleName, controllerRoute, procedure, methods, body);
             }
         }
-
-        return endpoints.ToImmutable();
     }
 
     private static bool Is(AnnotationTriviaNode annotation, string name) => string.Equals(annotation.Name, name, StringComparison.OrdinalIgnoreCase);

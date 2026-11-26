@@ -18,7 +18,8 @@ RDCore.Web associe les points de terminaison d'une application à leurs routes e
 |---|---|
 | Les points de terminaison des annotations `'@Controller`, `'@HttpGet` et `'@HttpPost` : la méthode HTTP, la route sous celle du contrôleur, et la vérification que chaque paramètre de route nomme un paramètre de la procédure | Fonctionne, à partir du nom et de l'argument de chaque annotation. |
 | Le bassin de machines : chaque requête s'exécute seule sur une machine, et une requête qui ne trouve aucune machine libre en attend une sans retenir de fil d'exécution | Fonctionne. Un bassin d'une seule machine sert ses requêtes une à la fois. |
-| La liaison : une valeur de route ou de chaîne de requête au paramètre de la procédure qui porte son nom, comme chaîne; le corps JSON d'un `POST` au premier paramètre que sa route ne lie pas | Fonctionne. |
+| La liaison : une valeur de route ou de chaîne de requête au paramètre de la procédure qui porte son nom, comme chaîne; le corps JSON d'un `POST` au paramètre que nomme `'@FromBody`, sinon au premier paramètre que sa route ne lie pas | Fonctionne. |
+| Les diagnostics de la liaison du corps : [RDW00001](docs/diagnostics/rdw00001.md) là où aucun `'@FromBody` ne nomme le paramètre du corps, avec un correctif rapide qui l'ajoute, et [RDW00002](docs/diagnostics/rdw00002.md) à chaque autre paramètre d'un `POST` que sa route ne lie pas | Fonctionne, dans une plateforme RDCore qui charge l'extension RDWeb. |
 | Les réponses : la valeur de la procédure en JSON (`200`), aucune valeur (`204`), une erreur d'exécution en `500` avec un corps de détails du problème (RFC 9457) qui contient le numéro et le code de l'erreur | Fonctionne. |
 | L'hôte : une page dans `wwwroot` qui appelle un point de terminaison et montre sa réponse | Fonctionne. L'hôte n'associe aucun point de terminaison. |
 
@@ -44,7 +45,7 @@ End Function
 | Projet | Ce que c'est |
 |---|---|
 | `RDCore.Web` | La bibliothèque du cadriciel, et le paquet NuGet du dépôt. Elle s'appuie sur RDCore.SDK et ASP.NET Core. |
-| `RDCore.Web.Host` | L'hôte ASP.NET Core qui sert une application. |
+| `RDCore.Web.Host` | L'hôte ASP.NET Core qui sert une application. Lancé par une plateforme RDCore, il est l'extension RDWeb, qui signale les diagnostics `RDW`; `PublishExtension.ps1` le publie dans le dossier `Extensions/RDCore.Web/` d'une plateforme. |
 | `RDCore.Web.Tests` | Les tests (MSTest). |
 
 ## Compiler à partir des sources
