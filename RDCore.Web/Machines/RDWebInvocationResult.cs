@@ -74,7 +74,9 @@ public sealed record class RDWebInvocationResult
     /// <param name="outcome">How it ended: neither <see cref="ExecutionOutcome.Completed"/> nor <see cref="ExecutionOutcome.RuntimeError"/>.</param>
     /// <param name="explanation">A short explanation of the outcome.</param>
     /// <returns>A result of that outcome.</returns>
-    /// <exception cref="ArgumentOutOfRangeException"><paramref name="outcome"/> is <see cref="ExecutionOutcome.Completed"/> or <see cref="ExecutionOutcome.RuntimeError"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="outcome"/> is <see cref="ExecutionOutcome.Completed"/> or <see cref="ExecutionOutcome.RuntimeError"/>.
+    /// </exception>
     public static RDWebInvocationResult Ended(ExecutionOutcome outcome, string explanation)
         => outcome is ExecutionOutcome.Completed or ExecutionOutcome.RuntimeError
             ? throw new ArgumentOutOfRangeException(nameof(outcome), outcome, null)
