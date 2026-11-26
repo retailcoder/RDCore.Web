@@ -37,7 +37,7 @@ Public Function Hello(ByVal name As Variant) As Variant
 End Function
 ```
 
-`Hello` is the endpoint `GET /api/hello/{name}`, and its route binds `name`. A machine answers with the value the function returns, as JSON.
+`Hello` is the endpoint `GET /api/hello/{name}`, and its route binds `name`. Running it, and answering with its `Dictionary` as a JSON object, take a machine, which is part of the direction above.
 
 ## The solution
 
