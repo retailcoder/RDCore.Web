@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using RDCore.SDK.Platform.Protocol;
+using RDCore.SDK.Runtime.Hosting;
 using RDCore.Web.Endpoints;
 using RDCore.Web.Machines;
 using System.Collections.Immutable;
@@ -10,10 +11,13 @@ using System.Text.Json.Nodes;
 
 namespace RDCore.Web.Hosting;
 
-// one request to an endpoint: its arguments bound, the procedure run on a machine, and its result written as the response.
+// one request to an endpoint: its arguments bound, the procedure run on a machine of the pool, and its result written as the response.
 internal static class RDWebRequests
 {
-    public static async Task ServeAsync(HttpContext context, RDWebEndpoint endpoint, IRDWebMachine machine)
+    // how many seconds a refused request is asked to wait before it tries again: a refusal is the pool being busy, which a moment can change.
+    private const string RetryAfterSeconds = "1";
+
+    public static async Task ServeAsync(HttpContext context, RDWebEndpoint endpoint, RDWebMachinePool pool)
     {
         var request = context.Request;
         var arguments = ImmutableDictionary.CreateBuilder<string, JsonNode?>(StringComparer.OrdinalIgnoreCase);
@@ -51,12 +55,17 @@ internal static class RDWebRequests
             }
         }
 
-        var invocation = new RDWebInvocation(endpoint.ModuleName, endpoint.ProcedureName, arguments.ToImmutable());
-        var result = await machine.InvokeAsync(invocation, context.RequestAborted);
+        var invocation = new ProgramInvocation(endpoint.ModuleName, endpoint.ProcedureName, arguments.ToImmutable());
+        var result = await pool.InvokeAsync(invocation, context.RequestAborted);
+        if (result.Outcome is ExecutionOutcome.Refused)
+        {
+            context.Response.Headers.RetryAfter = RetryAfterSeconds;
+        }
+
         await ResponseOf(endpoint, result).ExecuteAsync(context);
     }
 
-    private static IResult ResponseOf(RDWebEndpoint endpoint, RDWebInvocationResult result) => result switch
+    private static IResult ResponseOf(RDWebEndpoint endpoint, ProgramInvocationResult result) => result switch
     {
         { Outcome: ExecutionOutcome.Completed, HasValue: true } => Results.Text(result.Value?.ToJsonString() ?? "null", "application/json; charset=utf-8"),
         { Outcome: ExecutionOutcome.Completed } => Results.NoContent(),
