@@ -12,7 +12,7 @@ Ce dépôt est celui de **RDCore.Web**, le cadriciel web de [RDCore](https://git
 Le modèle du langage RD-VBA vient du paquet [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK). Ce que vous construisez avec RDCore.Web vous appartient (voir [NOTICE.md](NOTICE.md)). La documentation est sur le [site de RDCore.Web](https://rubberduck-vba.github.io/RDCore.Web/index.fr.html).
 
 ## État du projet
-RDCore.Web associe les points de terminaison d'une application à leurs routes et les sert au moyen d'ASP.NET Core. Il lit les points de terminaison dans les annotations de la source d'un module, et son hôte exécute le programme que `rdc compose` écrit d'un projet : chaque machine est une session d'exécution RDCore de ce programme.
+RDCore.Web associe les points de terminaison d'une application à leurs routes et les sert au moyen d'ASP.NET Core. Il lit les points de terminaison dans les annotations de la source d'un module, et son hôte exécute le programme que `rdc compose` compose à partir d'un projet : chaque machine est une session d'exécution RDCore de ce programme.
 
 | Partie | État |
 |---|---|

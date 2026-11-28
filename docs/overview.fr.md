@@ -5,11 +5,6 @@ Cette page explique comment s'agencent les parties d'une application RDCore.Web,
 à la [documentation d'ASP.NET Core](https://learn.microsoft.com/fr-fr/aspnet/core/introduction-to-aspnet-core) de Microsoft pour ce que fait ASP.NET Core.
 La [référence de RDCore.Web](specs/rdweb.md), en anglais, donne les règles de chaque partie.
 
-> [!NOTE]
-> **Non implémenté.** Aucune procédure RD-VBA ne s'exécute de bout en bout : aucune machine n'exécute une procédure dans une session d'exécution RDCore,
-> et l'hôte ne lit aucun module. Les étapes qui suivent la réception de la requête par une machine décrivent ce que fait RDCore.Web de la réponse d'une
-> machine.
-
 ---
 ## D'un module de classe à une réponse
 

@@ -12,7 +12,7 @@ This repository is for **RDCore.Web**, the web framework of [RDCore](https://git
 The RD-VBA language model comes from the [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK) package. What you build with RDCore.Web is yours (see [NOTICE.md](NOTICE.md)). The documentation is on the [RDCore.Web site](https://rubberduck-vba.github.io/RDCore.Web/).
 
 ## Project Status
-RDCore.Web maps the endpoints of an application and serves them through ASP.NET Core. It reads the endpoints from the annotations in a module's source, and its host runs the program that `rdc compose` writes of a project: each machine is an RDCore runtime session of that program.
+RDCore.Web maps the endpoints of an application and serves them through ASP.NET Core. It reads the endpoints from the annotations in a module's source, and its host runs the program that `rdc compose` composes from a project: each machine is an RDCore runtime session of that program.
 
 | Part | Status |
 |---|---|

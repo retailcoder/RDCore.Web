@@ -5,10 +5,6 @@ This page says how the parts of an RDCore.Web application fit together, and link
 [ASP.NET Core documentation](https://learn.microsoft.com/aspnet/core/introduction-to-aspnet-core) for what ASP.NET Core does. The
 [RDCore.Web Reference](specs/rdweb.md) has the rules of each part.
 
-> [!NOTE]
-> **Not implemented.** No RD-VBA procedure runs end to end: no machine runs a procedure in an RDCore runtime session, and the host reads no module.
-> The steps below that come after a machine receives the request describe what RDCore.Web does with a machine's answer.
-
 ---
 ## From a class module to a response
 
