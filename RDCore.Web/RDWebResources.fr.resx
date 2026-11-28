@@ -24,6 +24,9 @@
   <data name="Pool_InvalidLimit" xml:space="preserve">
     <value>Un bassin de machines recycle une machine après au moins une requête, et chacun de ses délais est positif.</value>
   </data>
+  <data name="KeptMachines_InvalidLimit" xml:space="preserve">
+    <value>Un registre de machines gardées contient au moins une machine, et chacun de ses délais est positif.</value>
+  </data>
   <data name="Pool_NoMachineInTime" xml:space="preserve">
     <value>Aucune machine n'était libre avant l'échéance de la requête.</value>
   </data>
