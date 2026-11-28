@@ -37,6 +37,18 @@ public sealed class RDWebExtensionTests
         Assert.AreEqual(RDWebDiagnostics.HelpBaseUri, prefix.HelpBaseUri);
     }
 
+    // an analyzer RDCore.Web declares and the extension does not run reports nothing in the editor.
+    [TestMethod]
+    public void TheExtension_RunsEveryModuleAnalyzerOfRDCoreWeb()
+    {
+        var declared = typeof(RDWebDiagnostics).Assembly.GetTypes()
+            .Where(type => type is { IsClass: true, IsAbstract: false } && typeof(IModuleAnalyzer).IsAssignableFrom(type))
+            .ToArray();
+        Assert.IsNotEmpty(declared);
+
+        CollectionAssert.AreEquivalent(declared, RDWebExtensionApp.Analyzers.Select(analyzer => analyzer.GetType()).ToArray());
+    }
+
     [TestMethod]
     public async Task TheExtensionsHandler_ReportsRDWebsFindings_EachLinkedToItsPage()
     {
