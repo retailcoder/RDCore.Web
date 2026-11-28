@@ -184,9 +184,9 @@ public sealed class RDWebKeptMachinesTests
         var answer = await MakeAsync(kept);
 
         Assert.AreEqual(outcome, answer.Result?.Outcome, "the request is answered as its machine answered it");
-        await maker[0].Disposed.WaitAsync(Token);
         Assert.AreEqual(RDWebKeptMachineStatus.NoMachine, (await InvokeAsync(kept)).Status);
         Assert.AreEqual(0, kept.Count);
+        await maker[0].Disposed.WaitAsync(Token);
     }
 
     [TestMethod]
@@ -227,8 +227,8 @@ public sealed class RDWebKeptMachinesTests
 
         await Assert.ThrowsExactlyAsync<InvalidOperationException>(() => InvokeAsync(kept));
 
-        await maker[0].Disposed.WaitAsync(Token);
         Assert.AreEqual(RDWebKeptMachineStatus.NoMachine, (await InvokeAsync(kept)).Status);
+        await maker[0].Disposed.WaitAsync(Token);
     }
 
     [TestMethod]
@@ -262,8 +262,8 @@ public sealed class RDWebKeptMachinesTests
         Assert.IsFalse(maker[0].IsDisposed, "the second request restarted the idle timeout");
 
         time.Advance(TimeSpan.FromSeconds(1));
-        await maker[0].Disposed.WaitAsync(Token);
         Assert.AreEqual(RDWebKeptMachineStatus.NoMachine, (await InvokeAsync(kept)).Status);
+        await maker[0].Disposed.WaitAsync(Token);
     }
 
     [TestMethod]
