@@ -22,7 +22,7 @@ RDCore.Web maps the endpoints of an application and serves them through ASP.NET 
 | Diagnostics of the body binding: [RDW00001](docs/diagnostics/rdw00001.md) where no `'@FromBody` names the body's parameter, with a quick fix that adds it, and [RDW00002](docs/diagnostics/rdw00002.md) at each further parameter of a `POST` that its route does not bind | Works, in an RDCore platform that loads the RDWeb extension. |
 | A diagnostic of the objects of a class that an action takes or returns: [RDW00003](docs/diagnostics/rdw00003.md) at the body's parameter or the action's name, naming each member that does not come back as it went out through JSON | Works, in an RDCore platform that loads the RDWeb extension. |
 | Responses: the procedure's value as JSON (`200`), no value (`204`), a run-time error as `500` with a problem details body (RFC 9457) that holds the error's number and code | Works. |
-| The host: the program of a composition (`--RDWeb:Composition`), its endpoints served by a pool and by kept machines, the files of its web root, and the external host of its own machines | Works. The procedure of a class module runs on a new instance of the class for each request, or on its default instance when the class is predeclared. |
+| The host: the program of a composition (`--RDWeb:Composition`), its endpoints served by a pool and by kept machines, the files of its web root, and the external host of its own machines | Works. The procedure of a class module runs on a new instance of the class for each request; a class with a default instance is not a controller. |
 
 The annotations of a controller module:
 
