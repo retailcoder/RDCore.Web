@@ -8,9 +8,10 @@ The endpoints of a controller with `'@KeptMachine` run on kept machines instead 
 requests share that machine's state, one request at a time.
 
 The procedure of a class module runs on a new instance of the class, made for its request as `New` makes one: `Class_Initialize` runs before the
-procedure, and `Class_Terminate` once its value is converted to JSON. A class whose `VB_PredeclaredId` is `True` is no exception: its default instance
-is not used. An error that `Class_Initialize` does not handle is the request's run-time error ([§5.2](rdweb.5.0.responses.md#52-run-time-errors)), and
-the procedure does not run. State that outlives a request lives in a standard module, on a kept machine.
+procedure, and `Class_Terminate` once the procedure returns and its value is converted to JSON. An unhandled error or an
+`End` ends the run, and the run's end lets go of the instance. The same holds for a class whose `VB_PredeclaredId` is `True`: its default instance is not
+used. An error that `Class_Initialize` does not handle is the request's run-time error ([§5.2](rdweb.5.0.responses.md#52-run-time-errors)), and the
+procedure does not run. State that outlives a request lives in a standard module, on a kept machine.
 
 ---
 ## 6.1 The Machine Pool

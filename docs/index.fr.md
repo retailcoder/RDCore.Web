@@ -2,8 +2,7 @@
 <sup>_This document is available in [English](index.md)_</sup>
 
 > [!NOTE]
-> RDCore.Web est en pré-alpha. Il associe et sert des points de terminaison, mais aucune procédure RD-VBA ne s'exécute encore de bout en bout : voir
-> [Ce qui fonctionne](#ce-qui-fonctionne).
+> RDCore.Web est en pré-alpha. Son hôte sert les points de terminaison d'un programme composé : voir [Ce qui fonctionne](#ce-qui-fonctionne).
 
 ---
 ## Ce que c'est
@@ -39,12 +38,8 @@ End Function
 |Les réponses : la valeur de la procédure en JSON, aucune valeur, une erreur d'exécution en corps « problem details »|Fonctionne.|
 |Un bassin de machines, chacune n'exécutant qu'une requête à la fois|Fonctionne.|
 |Les machines gardées : une machine pour chaque clé d'un contrôleur qui a `'@KeptMachine`, créée par `'@NewMachine` et jamais réinitialisée entre ses requêtes|Fonctionne.|
-|Les valeurs JSON : les objets des classes de l'espace de travail, les tableaux typés et `Collection`, et la bibliothèque `RDJson` pour le code VBA|Fonctionne dans l'environnement d'exécution de RDCore. Aucun point de terminaison n'y parvient : voir la note ci-dessous.|
-|L'hôte : une page qui appelle un point de terminaison et affiche sa réponse|Fonctionne. L'hôte n'associe aucun point de terminaison.|
-
-> [!NOTE]
-> **Non implémenté.** Aucune machine n'exécute une procédure dans une session d'exécution RDCore, et l'hôte ne lit aucun module. La requête d'un point
-> de terminaison parvient à une machine, mais aucun code RD-VBA n'y répond.
+|Les valeurs JSON : les objets des classes de l'espace de travail, les tableaux typés et `Collection`, et la bibliothèque `RDJson` pour le code VBA|Fonctionne, dans les arguments et la valeur d'un point de terminaison, et dans le code VBA.|
+|L'hôte : le programme d'une composition (`--RDWeb:Composition`), ses points de terminaison, les fichiers de sa racine web, et l'hôte externe de ses propres machines|Fonctionne.|
 
 ---
 ## Pour la suite

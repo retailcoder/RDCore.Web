@@ -2,7 +2,7 @@
 <sup>_Ce document est disponible en [français](index.fr.md)_</sup>
 
 > [!NOTE]
-> RDCore.Web is pre-alpha. It maps and serves endpoints, but no RD-VBA procedure runs end to end yet: see [What works](#what-works).
+> RDCore.Web is pre-alpha. Its host serves the endpoints of a composed program: see [What works](#what-works).
 
 ---
 ## What it is
@@ -37,12 +37,8 @@ End Function
 |Responses: the procedure's value as JSON, no value, a run-time error as a problem details body|Works.|
 |A pool of machines, each running one request at a time|Works.|
 |Kept machines: a machine for each key of a controller with `'@KeptMachine`, made by `'@NewMachine` and never reset between its requests|Works.|
-|JSON values: objects of the workspace's classes, typed arrays and `Collection`, and the `RDJson` library for VBA code|Works in RDCore's runtime. No endpoint reaches it: see the note below.|
-|The host: a page that calls an endpoint and shows its answer|Works. The host maps no endpoint.|
-
-> [!NOTE]
-> **Not implemented.** No machine runs a procedure in an RDCore runtime session, and the host reads no module. An endpoint's request reaches a machine,
-> but no RD-VBA code answers it.
+|JSON values: objects of the workspace's classes, typed arrays and `Collection`, and the `RDJson` library for VBA code|Works, in an endpoint's arguments and value, and in VBA code.|
+|The host: the program of a composition (`--RDWeb:Composition`), its endpoints, the files of its web root, and the external host of its own machines|Works.|
 
 ---
 ## Where to go next
