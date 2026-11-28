@@ -45,4 +45,19 @@
   <data name="NewMachine" xml:space="preserve">
     <value>Crée la machine de la clé de la requête avant que la procédure s'exécute, dans un contrôleur qui a '@KeptMachine.</value>
   </data>
+  <data name="ControllerFactory" xml:space="preserve">
+    <value>Nomme la fonction qui crée un contrôleur pour chaque requête, exécutée sur l'instance par défaut de la classe avec ses paramètres donnés comme services. Sans elle, la fonction est Create.</value>
+  </data>
+  <data name="ControllerFactory_Factory" xml:space="preserve">
+    <value>Le nom d'une fonction publique de la classe qui retourne le contrôleur.</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Fait de la classe un service : un paramètre déclaré du type de son nom reçoit un objet de la classe, un nouveau, ou celui que retourne sa fonction Create quand la classe a une instance par défaut.</value>
+  </data>
+  <data name="Service_Name" xml:space="preserve">
+    <value>Le nom du service : le type qu'un paramètre déclare pour le recevoir, que la classe est ou implémente. Sans lui, le nom de la classe elle-même.</value>
+  </data>
+  <data name="Service_Lifetime" xml:space="preserve">
+    <value>Scoped (un objet par requête), Transient (un par paramètre) ou Singleton (un par machine). Sans elle, Scoped.</value>
+  </data>
 </root>

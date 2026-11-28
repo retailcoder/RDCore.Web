@@ -42,6 +42,17 @@ internal sealed class RDWebAnnotationDeclarations : IAnnotationDeclarations
             Parameters = [Required("Parameter")],
         },
         new() { Name = RDWebAnnotations.NewMachine, Targets = AnnotationTargets.Member, ModuleKinds = ControllerModules },
+        // a factory runs on a default instance, and a service is an object: both are of a class module only.
+        new()
+        {
+            Name = RDWebAnnotations.ControllerFactory, Targets = AnnotationTargets.Module, ModuleKinds = AnnotationModuleKinds.Class,
+            Parameters = [Required("Factory")],
+        },
+        new()
+        {
+            Name = RDWebAnnotations.Service, Targets = AnnotationTargets.Module, ModuleKinds = AnnotationModuleKinds.Class,
+            Parameters = [Optional("Name"), Optional("Lifetime")],
+        },
     ];
 
     private static AnnotationParameter Required(string name) => new() { Name = name, Takes = AnnotationArgumentKind.Text };

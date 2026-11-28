@@ -93,4 +93,19 @@
   <data name="Problem_MachinesFull" xml:space="preserve">
     <value>No more machines can be kept.</value>
   </data>
+  <data name="Service_NotAClass" xml:space="preserve">
+    <value>The module {0} has a &apos;@Service annotation, and only a class module is a service.</value>
+  </data>
+  <data name="Service_UnknownLifetime" xml:space="preserve">
+    <value>The service of the class {0} has the lifetime &apos;{1}&apos;: a service is Scoped, Transient or Singleton.</value>
+  </data>
+  <data name="Service_NotItsType" xml:space="preserve">
+    <value>The class {0} is the service {1}, and it is not {1}: it does not implement {1}. Name the class&apos;s own name, or add Implements {1}.</value>
+  </data>
+  <data name="Service_DuplicateName" xml:space="preserve">
+    <value>The classes {0} and {1} are both the service {2} (RDW00005). Give one of them another name.</value>
+  </data>
+  <data name="NonObjectFactoryParameter_Message" xml:space="preserve">
+    <value>The parameter &apos;{0}&apos; of the factory {1} is not of an object type: each parameter of a factory is given a service, and a service is an object. Declare it as the service&apos;s class or interface.</value>
+  </data>
 </root>

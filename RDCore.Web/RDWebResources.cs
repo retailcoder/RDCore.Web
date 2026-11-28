@@ -37,4 +37,9 @@ internal static class RDWebResources
     public static string MemberNotRoundTripped_Message => Get(nameof(MemberNotRoundTripped_Message));
     public static string MemberNotRoundTripped_ReadOnly => Get(nameof(MemberNotRoundTripped_ReadOnly));
     public static string MemberNotRoundTripped_Dictionary => Get(nameof(MemberNotRoundTripped_Dictionary));
+    public static string Service_NotAClass => Get(nameof(Service_NotAClass));
+    public static string Service_UnknownLifetime => Get(nameof(Service_UnknownLifetime));
+    public static string Service_NotItsType => Get(nameof(Service_NotItsType));
+    public static string Service_DuplicateName => Get(nameof(Service_DuplicateName));
+    public static string NonObjectFactoryParameter_Message => Get(nameof(NonObjectFactoryParameter_Message));
 }

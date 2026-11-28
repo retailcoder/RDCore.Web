@@ -10,8 +10,8 @@ using System.Resources;
 namespace RDCore.Web.Tests.Host;
 
 /// <summary>
-/// The annotations the RDWeb extension's assembly declares, as <c>rdc describe-ext</c> reads them into its manifest: every one the endpoint reader reads,
-/// legal where a controller is written, and described in every language of the platform.
+/// The annotations the RDWeb extension's assembly declares, as <c>rdc describe-ext</c> reads them into its manifest: every one RDCore.Web reads, legal
+/// where it is written, and described in every language of the platform.
 /// </summary>
 [TestClass]
 public sealed class RDWebAnnotationDeclarationsTests
@@ -19,17 +19,17 @@ public sealed class RDWebAnnotationDeclarationsTests
     private static AnnotationSet Read() => ExtensionAnnotationsAttribute.Read(typeof(RDWebExtensionApp).Assembly)
         ?? throw new AssertFailedException("the host's assembly declares no annotations");
 
-    // every annotation name RDWebAnnotations holds, which is what the endpoint reader reads.
-    private static string[] ReadByTheEndpointReader() => typeof(RDWebAnnotations)
+    // every annotation name RDWebAnnotations holds, which is what the endpoint and service readers read.
+    private static string[] ReadByRDCoreWeb() => typeof(RDWebAnnotations)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Where(field => field is { IsLiteral: true } && field.FieldType == typeof(string))
         .Select(field => (string)field.GetRawConstantValue()!)
         .ToArray();
 
     [TestMethod]
-    public void EveryAnnotationTheEndpointReaderReads_IsDeclaredByTheHostsAssembly()
+    public void EveryAnnotationRDCoreWebReads_IsDeclaredByTheHostsAssembly()
     {
-        var names = ReadByTheEndpointReader();
+        var names = ReadByRDCoreWeb();
         Assert.IsNotEmpty(names);
 
         CollectionAssert.AreEquivalent(names, Read().Declarations.Select(annotation => annotation.Name).ToArray());
@@ -50,7 +50,10 @@ public sealed class RDWebAnnotationDeclarationsTests
         var set = Read();
         var keys = set.Declarations.SelectMany(annotation => annotation.Parameters.Select(parameter => AnnotationSet.KeyOf(annotation, parameter))
             .Prepend(AnnotationSet.KeyOf(annotation))).ToArray();
-        var resources = new ResourceManager(RDWebAnnotationDeclarations.DescriptionsResource, typeof(RDWebExtensionApp).Assembly);
+        var assembly = typeof(RDWebExtensionApp).Assembly;
+        var declared = assembly.GetCustomAttribute<ExtensionAnnotationsAttribute>()
+            ?? throw new AssertFailedException("the host's assembly declares no annotations");
+        var resources = new ResourceManager(declared.DescriptionsResource, assembly);
 
         foreach (var language in SettingsSchema.Languages)
         {
@@ -77,6 +80,21 @@ public sealed class RDWebAnnotationDeclarationsTests
 
         Assert.IsTrue(IsLegalIn(AnnotationModuleKinds.Standard), "standard module");
         Assert.IsTrue(IsLegalIn(AnnotationModuleKinds.Class), "class module");
+        Assert.IsFalse(IsLegalIn(AnnotationModuleKinds.Form), "form");
+        Assert.IsFalse(IsLegalIn(AnnotationModuleKinds.Document), "document module");
+    }
+
+    // a factory runs on a default instance, and a service is an object: they are legal in a class module, and in no other kind of module.
+    [TestMethod]
+    [DataRow(RDWebAnnotations.ControllerFactory)]
+    [DataRow(RDWebAnnotations.Service)]
+    public void AFactoryOrAServiceAnnotation_IsLegalInAClassModuleOnly(string name)
+    {
+        var catalogue = new AnnotationCatalogue([Read()]);
+        bool IsLegalIn(AnnotationModuleKinds kind) => catalogue.LegalAt(AnnotationTargets.Module, kind).Any(annotation => annotation.IsCalled(name));
+
+        Assert.IsTrue(IsLegalIn(AnnotationModuleKinds.Class), "class module");
+        Assert.IsFalse(IsLegalIn(AnnotationModuleKinds.Standard), "standard module");
         Assert.IsFalse(IsLegalIn(AnnotationModuleKinds.Form), "form");
         Assert.IsFalse(IsLegalIn(AnnotationModuleKinds.Document), "document module");
     }

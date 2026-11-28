@@ -33,4 +33,16 @@ public static class RDWebDiagnostics
     /// (<see cref="MemberNotRoundTrippedAnalyzer"/>).
     /// </summary>
     public static RDCoreDiagnosticCode MemberNotRoundTripped { get; } = new(Prefix, 3);
+
+    /// <summary>
+    /// <c>RDW00005</c>: two classes of a program declare one <c>'@Service</c> name. The host refuses the program at startup
+    /// (<see cref="Services.RDWebServiceReader.Distinct"/>); no analyzer reports it in the editor.
+    /// </summary>
+    public static RDCoreDiagnosticCode DuplicateServiceName { get; } = new(Prefix, 5);
+
+    /// <summary>
+    /// <c>RDW00006</c>: a parameter of the factory of a controller or a service is not of an object type, and no service can be given it
+    /// (<see cref="NonObjectFactoryParameterAnalyzer"/>).
+    /// </summary>
+    public static RDCoreDiagnosticCode NonObjectFactoryParameter { get; } = new(Prefix, 6);
 }

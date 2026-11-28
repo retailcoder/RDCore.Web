@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Http;
 namespace RDCore.Web.Endpoints;
 
 /// <summary>
-/// The comment annotations that declare the endpoints of an RD-VBA module: <c>'@Controller</c> and <c>'@KeptMachine</c> on the module, <c>'@HttpGet</c>,
-/// <c>'@HttpPost</c>, <c>'@FromBody</c> and <c>'@NewMachine</c> on its procedures.
+/// The comment annotations of RDCore.Web: the endpoints of an RD-VBA module, with <c>'@Controller</c>, <c>'@KeptMachine</c> and
+/// <c>'@ControllerFactory</c> on the module and <c>'@HttpGet</c>, <c>'@HttpPost</c>, <c>'@FromBody</c> and <c>'@NewMachine</c> on its procedures; and the
+/// services of a program, with <c>'@Service</c> on a class.
 /// </summary>
 /// <remarks>
-/// They are RD-VBA comment annotations (<strong>RD-VBAL §3.0.1.1</strong>): to MS-VBA they are comments. <c>'@Controller</c> and <c>'@KeptMachine</c> are
-/// module annotations, written in the module's declarations section; the others are member annotations, written immediately above the procedure.
-/// <c>'@HttpGet</c> and <c>'@HttpPost</c> each take one optional string argument, their route template.
+/// They are RD-VBA comment annotations (<strong>RD-VBAL §3.0.1.1</strong>): to MS-VBA they are comments. <c>'@Controller</c>, <c>'@KeptMachine</c>,
+/// <c>'@ControllerFactory</c> and <c>'@Service</c> are module annotations, written in the module's declarations section; the others are member annotations,
+/// written immediately above the procedure. <c>'@HttpGet</c> and <c>'@HttpPost</c> each take one optional string argument, their route template.
 /// </remarks>
 public static class RDWebAnnotations
 {
@@ -51,6 +52,20 @@ public static class RDWebAnnotations
     /// controller runs on the machine its key already has.
     /// </summary>
     public const string NewMachine = "NewMachine";
+
+    /// <summary>
+    /// The module annotation that names the factory of a controller class with a default instance: <c>'@ControllerFactory("Make")</c>. The default
+    /// instance runs the factory for each request, and the action runs on the object it returns. Without it, the factory is <c>Create</c>
+    /// (<see cref="Services.RDWebServiceReader.DefaultFactory"/>).
+    /// </summary>
+    public const string ControllerFactory = "ControllerFactory";
+
+    /// <summary>
+    /// The module annotation that makes a class a service of the program: <c>'@Service</c>, <c>'@Service("IOrderRepository")</c> or
+    /// <c>'@Service("IClock", "Singleton")</c>. Its first argument is the service's name, the type a parameter declares to be given it, and the class's own
+    /// name without one; its second is the service's lifetime, <c>Scoped</c> without one (<see cref="Services.RDWebServiceReader"/>).
+    /// </summary>
+    public const string Service = "Service";
 
     /// <summary>
     /// The HTTP method a member annotation serves its procedure for.

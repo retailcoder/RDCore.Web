@@ -4,3 +4,5 @@
   href: rdw00002.md
 - name: "RDW00003: Member not round-tripped"
   href: rdw00003.md
+- name: "RDW00005: Duplicate service name"
+  href: rdw00005.md
