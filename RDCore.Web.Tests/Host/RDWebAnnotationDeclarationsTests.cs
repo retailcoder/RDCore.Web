@@ -50,7 +50,10 @@ public sealed class RDWebAnnotationDeclarationsTests
         var set = Read();
         var keys = set.Declarations.SelectMany(annotation => annotation.Parameters.Select(parameter => AnnotationSet.KeyOf(annotation, parameter))
             .Prepend(AnnotationSet.KeyOf(annotation))).ToArray();
-        var resources = new ResourceManager(RDWebAnnotationDeclarations.DescriptionsResource, typeof(RDWebExtensionApp).Assembly);
+        var assembly = typeof(RDWebExtensionApp).Assembly;
+        var declared = assembly.GetCustomAttribute<ExtensionAnnotationsAttribute>()
+            ?? throw new AssertFailedException("the host's assembly declares no annotations");
+        var resources = new ResourceManager(declared.DescriptionsResource, assembly);
 
         foreach (var language in SettingsSchema.Languages)
         {
