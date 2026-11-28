@@ -4,8 +4,8 @@ namespace RDCore.Web.Endpoints;
 
 /// <summary>
 /// The comment annotations of RDCore.Web: the endpoints of an RD-VBA module, with <c>'@Controller</c>, <c>'@KeptMachine</c> and
-/// <c>'@ControllerFactory</c> on the module and <c>'@HttpGet</c>, <c>'@HttpPost</c>, <c>'@FromBody</c> and <c>'@NewMachine</c> on its procedures; and the
-/// services of a program, with <c>'@Service</c> on a class.
+/// <c>'@ControllerFactory</c> on the module and <c>'@HttpGet</c>, <c>'@HttpPost</c>, <c>'@FromBody</c> and <c>'@NewMachine</c> on its procedures; who may reach
+/// them, with <c>'@Authorize</c> and <c>'@AllowAnonymous</c> on the module or a procedure; and the services of a program, with <c>'@Service</c> on a class.
 /// </summary>
 /// <remarks>
 /// They are RD-VBA comment annotations (<strong>RD-VBAL §3.0.1.1</strong>): to MS-VBA they are comments. <c>'@Controller</c>, <c>'@KeptMachine</c>,
@@ -66,6 +66,19 @@ public static class RDWebAnnotations
     /// name without one; its second is the service's lifetime, <c>Scoped</c> without one (<see cref="Services.RDWebServiceReader"/>).
     /// </summary>
     public const string Service = "Service";
+
+    /// <summary>
+    /// The annotation that lets only a signed-in user reach a controller or an action: <c>'@Authorize</c> or <c>'@Authorize("Admins")</c>, written in the
+    /// controller's declarations section or immediately above the procedure. Its argument names a policy the user must meet, one that <c>Program.Run</c>
+    /// adds; without one, any signed-in user does.
+    /// </summary>
+    public const string Authorize = "Authorize";
+
+    /// <summary>
+    /// The annotation that lets any request reach a controller or an action, signed in or not, though the controller has <see cref="Authorize"/>:
+    /// <c>'@AllowAnonymous</c>, written in the controller's declarations section or immediately above the procedure.
+    /// </summary>
+    public const string AllowAnonymous = "AllowAnonymous";
 
     /// <summary>
     /// The HTTP method a member annotation serves its procedure for.

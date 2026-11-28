@@ -60,4 +60,13 @@
   <data name="Service_Lifetime" xml:space="preserve">
     <value>Scoped (un objet par requête), Transient (un par paramètre) ou Singleton (un par machine). Si elle est omise, Scoped.</value>
   </data>
+  <data name="Authorize" xml:space="preserve">
+    <value>Ne laisse qu'un utilisateur connecté atteindre le contrôleur ou l'action. Une requête sans connexion est envoyée à la connexion et n'atteint jamais une machine.</value>
+  </data>
+  <data name="Authorize_Policy" xml:space="preserve">
+    <value>Le nom d'une stratégie qu'ajoute Program.Run et que l'utilisateur doit satisfaire. S'il est omis, tout utilisateur connecté.</value>
+  </data>
+  <data name="AllowAnonymous" xml:space="preserve">
+    <value>Laisse toute requête atteindre le contrôleur ou l'action, connectée ou non, même quand le contrôleur est annoté '@Authorize.</value>
+  </data>
 </root>

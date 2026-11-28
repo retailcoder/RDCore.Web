@@ -60,4 +60,13 @@
   <data name="Service_Lifetime" xml:space="preserve">
     <value>Scoped (one object per request), Transient (one per parameter) or Singleton (one per machine). When it is omitted, Scoped.</value>
   </data>
+  <data name="Authorize" xml:space="preserve">
+    <value>Lets only a signed-in user reach the controller or the action. A request that is not signed in is sent to sign in, and never reaches a machine.</value>
+  </data>
+  <data name="Authorize_Policy" xml:space="preserve">
+    <value>The name of a policy that Program.Run adds, which the user must meet. When it is omitted, any signed-in user.</value>
+  </data>
+  <data name="AllowAnonymous" xml:space="preserve">
+    <value>Lets any request reach the controller or the action, signed in or not, even when the controller has '@Authorize.</value>
+  </data>
 </root>

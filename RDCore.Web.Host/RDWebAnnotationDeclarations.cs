@@ -42,6 +42,13 @@ internal sealed class RDWebAnnotationDeclarations : IAnnotationDeclarations
             Parameters = [Required("Parameter")],
         },
         new() { Name = RDWebAnnotations.NewMachine, Targets = AnnotationTargets.Member, ModuleKinds = ControllerModules },
+        // who may reach a controller, or one of its actions.
+        new()
+        {
+            Name = RDWebAnnotations.Authorize, Targets = AnnotationTargets.Module | AnnotationTargets.Member, ModuleKinds = ControllerModules,
+            Parameters = [Optional("Policy")],
+        },
+        new() { Name = RDWebAnnotations.AllowAnonymous, Targets = AnnotationTargets.Module | AnnotationTargets.Member, ModuleKinds = ControllerModules },
         // a factory runs on a default instance, and a service is an object: both are of a class module only.
         new()
         {

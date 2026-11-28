@@ -73,6 +73,10 @@ public sealed class RDWebAnnotationDeclarationsTests
     [DataRow(RDWebAnnotations.HttpPost, AnnotationTargets.Member)]
     [DataRow(RDWebAnnotations.FromBody, AnnotationTargets.Member)]
     [DataRow(RDWebAnnotations.NewMachine, AnnotationTargets.Member)]
+    [DataRow(RDWebAnnotations.Authorize, AnnotationTargets.Module)]
+    [DataRow(RDWebAnnotations.Authorize, AnnotationTargets.Member)]
+    [DataRow(RDWebAnnotations.AllowAnonymous, AnnotationTargets.Module)]
+    [DataRow(RDWebAnnotations.AllowAnonymous, AnnotationTargets.Member)]
     public void AnRDWebAnnotation_IsLegalInAStandardOrAClassModule_AndInNoFormOrDocumentModule(string name, AnnotationTargets target)
     {
         var catalogue = new AnnotationCatalogue([Read()]);
