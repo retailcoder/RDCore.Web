@@ -75,4 +75,22 @@
   <data name="MemberNotRoundTripped_Dictionary" xml:space="preserve">
     <value>{0} is read back as a Dictionary when it holds an object</value>
   </data>
+  <data name="Endpoint_KeptMachineKeyIsNoRouteParameter" xml:space="preserve">
+    <value>The machine key &apos;{0}&apos; that &apos;@KeptMachine names for {1}.{2} is not a parameter of its route.</value>
+  </data>
+  <data name="Endpoint_NewMachineIsNotKept" xml:space="preserve">
+    <value>{0}.{1} makes a machine with &apos;@NewMachine, and its controller has no &apos;@KeptMachine.</value>
+  </data>
+  <data name="Hosting_NoKeptMachines" xml:space="preserve">
+    <value>The endpoint {0} {1} of {2}.{3} keeps a machine for each key, and no registry of kept machines was given.</value>
+  </data>
+  <data name="Problem_NoMachine" xml:space="preserve">
+    <value>There is no machine for the key &apos;{0}&apos;.</value>
+  </data>
+  <data name="Problem_MachineAlreadyMade" xml:space="preserve">
+    <value>The key &apos;{0}&apos; already has a machine.</value>
+  </data>
+  <data name="Problem_MachinesFull" xml:space="preserve">
+    <value>No more machines can be kept.</value>
+  </data>
 </root>
