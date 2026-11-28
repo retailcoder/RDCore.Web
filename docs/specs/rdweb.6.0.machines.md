@@ -85,7 +85,7 @@ An application that maps the endpoints of such a controller gives `MapRDWebEndpo
 |---|---|---|
 |A request to a `'@NewMachine` endpoint, and its key has no machine|Makes the machine, then runs the procedure on it.|As [§5.0](rdweb.5.0.responses.md) describes.|
 |The same, and its key has a machine|Runs nothing.|`409 Conflict`, with problem details.|
-|The same, and `MaxMachines` machines are kept|Runs nothing, and keeps every machine.|`503 Service Unavailable`, with when to retry.|
+|The same, and `MaxMachines` machines are kept|Runs nothing, and keeps every machine.|`503 Service Unavailable`, with problem details and a `Retry-After` of one second.|
 |A request to another endpoint, and its key has no machine|Runs nothing.|`404 Not Found`, with problem details.|
 |A request to another endpoint, and its key has a machine|Runs the procedure on it once it is free: one request at a time, in the order they arrive. A request waits without holding a thread.|As [§5.0](rdweb.5.0.responses.md) describes.|
 |The procedure completed, raised a run-time error, or was not found|Keeps the machine.|As [§5.0](rdweb.5.0.responses.md) describes.|
