@@ -52,15 +52,17 @@ A section not yet written is listed without a link.
   - [5.1 Returned Values](rdweb.5.0.responses.md#51-returned-values)
   - [5.2 Run-time Errors](rdweb.5.0.responses.md#52-run-time-errors)
   - [5.3 Other Outcomes](rdweb.5.0.responses.md#53-other-outcomes)
-- 6.0 Machines
-  - 6.1 The Machine Pool
-- 7.0 Hosting
-  - 7.1 Mapping Endpoints
-  - 7.2 The RDCore.Web Host
+- [6.0 Machines](rdweb.6.0.machines.md)
+  - [6.1 The Machine Pool](rdweb.6.0.machines.md#61-the-machine-pool)
+- [7.0 Hosting](rdweb.7.0.hosting.md)
+  - [7.1 Mapping Endpoints](rdweb.7.0.hosting.md#71-mapping-endpoints)
+  - [7.2 The RDCore.Web Host](rdweb.7.0.hosting.md#72-the-rdcoreweb-host)
 - [8.0 JSON Values](rdweb.8.0.json-values.md)
   - [8.1 From VBA to JSON](rdweb.8.0.json-values.md#81-from-vba-to-json)
   - [8.2 From JSON to VBA](rdweb.8.0.json-values.md#82-from-json-to-vba)
   - [8.3 Arguments](rdweb.8.0.json-values.md#83-arguments)
+  - [8.4 Objects](rdweb.8.0.json-values.md#84-objects)
+  - [8.5 The RDJson library](rdweb.8.0.json-values.md#85-the-rdjson-library)
 
 |Section|Covers|
 |---|---|
@@ -71,7 +73,7 @@ A section not yet written is listed without a link.
 |5.0|The response each outcome of the procedure answers: a value, no value, a run-time error, and any other outcome.|
 |6.0|The machines that run the procedures, and the pool that gives each request one of its own.|
 |7.0|How an ASP.NET Core application maps the endpoints, and the host that serves the application's pages.|
-|8.0|How a procedure's arguments and returned value convert between VBA and JSON.|
+|8.0|How a procedure's arguments and returned value convert between VBA and JSON, objects of the workspace's classes included, and the `RDJson` library that VBA code converts its own values with.|
 
 ---
 ## Conventions
