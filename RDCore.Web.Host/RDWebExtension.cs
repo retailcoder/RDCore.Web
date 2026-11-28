@@ -42,12 +42,24 @@ internal sealed class RDWebExtensionApp(
         new NonObjectFactoryParameterAnalyzer(),
     ];
 
-    protected override void ConfigureHandlers(IRDCoreLSPHandlerConfigurationBuilder builder) => builder.WithHandler<AnalyzerDiagnosticsHandler>();
+    // every analyzer of the extension that sees all the modules of a project at once, which its handler runs on each project.
+    public static IReadOnlyList<IProjectModulesAnalyzer> ProjectModulesAnalyzers { get; } = [new DuplicateServiceNameAnalyzer()];
+
+    protected override void ConfigureHandlers(IRDCoreLSPHandlerConfigurationBuilder builder)
+    {
+        builder.WithHandler<AnalyzerDiagnosticsHandler>();
+        builder.WithHandler<ProjectModulesAnalyzerDiagnosticsHandler>();
+    }
 
     protected override void ConfigureServices(IServiceCollection services)
     {
         services.AddSingleton<ICoreDiagnosticsFactory>(Diagnostics);
         foreach (var analyzer in Analyzers)
+        {
+            services.AddSingleton(analyzer);
+        }
+
+        foreach (var analyzer in ProjectModulesAnalyzers)
         {
             services.AddSingleton(analyzer);
         }

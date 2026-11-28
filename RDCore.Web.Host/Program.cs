@@ -11,6 +11,9 @@ using System.Runtime.CompilerServices;
 // marks the RDWeb extension a diagnostics provider: the language server sends it rdcore/diagnostics/document, and `rdc describe-ext` records it.
 [assembly: ProvidesCorePlatformClientCapability<DiagnoseDocument>]
 
+// and of the modules of a project together: the language server sends it rdcore/diagnostics/projectModules (RDW00005 compares the classes of a project).
+[assembly: ProvidesCorePlatformClientCapability<DiagnoseProjectModules>]
+
 // its diagnostics are reported under RDW codes, and each code has a page under RDCore.Web's documentation.
 [assembly: DiagnosticPrefix(RDWebDiagnostics.Prefix, HelpBaseUri = RDWebDiagnostics.HelpBaseUri)]
 

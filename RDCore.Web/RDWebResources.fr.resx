@@ -108,4 +108,10 @@
   <data name="NonObjectFactoryParameter_Message" xml:space="preserve">
     <value>Le paramètre &apos;{0}&apos; de la fabrique {1} n&apos;est pas d&apos;un type objet : chaque paramètre d&apos;une fabrique reçoit un service, et un service est un objet. Déclarez-le comme la classe ou l&apos;interface du service.</value>
   </data>
+  <data name="DuplicateServiceName_Message" xml:space="preserve">
+    <value>Le nom de service &apos;{0}&apos; est aussi déclaré par {1} : un paramètre déclaré &apos;{0}&apos; pourrait recevoir un objet de l&apos;une ou l&apos;autre classe. Gardez-le sur une seule classe.</value>
+  </data>
+  <data name="DuplicateServiceName_Related" xml:space="preserve">
+    <value>Le même nom de service, déclaré par {0}.</value>
+  </data>
 </root>

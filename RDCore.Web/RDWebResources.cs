@@ -42,4 +42,6 @@ internal static class RDWebResources
     public static string Service_NotItsType => Get(nameof(Service_NotItsType));
     public static string Service_DuplicateName => Get(nameof(Service_DuplicateName));
     public static string NonObjectFactoryParameter_Message => Get(nameof(NonObjectFactoryParameter_Message));
+    public static string DuplicateServiceName_Message => Get(nameof(DuplicateServiceName_Message));
+    public static string DuplicateServiceName_Related => Get(nameof(DuplicateServiceName_Related));
 }
