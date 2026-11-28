@@ -16,10 +16,10 @@
     <value>Makes the module a controller: each of its public procedures with an HTTP method annotation serves an endpoint.</value>
   </data>
   <data name="Controller_Route" xml:space="preserve">
-    <value>The route that prefixes the routes of the module's endpoints. Without it, the module's name less a Controller suffix.</value>
+    <value>The route that prefixes the routes of the module's endpoints. When it is omitted, the route is the module's name less a Controller suffix.</value>
   </data>
   <data name="KeptMachine" xml:space="preserve">
-    <value>Runs each request to the controller on the machine kept for the value of a route parameter, which is never reset.</value>
+    <value>Runs each request to the controller on the machine kept for its key, the value of a route parameter. The machine is never reset: the key's requests share its state.</value>
   </data>
   <data name="KeptMachine_Key" xml:space="preserve">
     <value>The route parameter whose value is the machine's key.</value>
@@ -43,6 +43,6 @@
     <value>The name of a parameter of the procedure.</value>
   </data>
   <data name="NewMachine" xml:space="preserve">
-    <value>Makes the machine of the request's key before the procedure runs, in a controller with '@KeptMachine.</value>
+    <value>Creates the machine of the request's key, then runs the procedure on it. Legal only in a controller with '@KeptMachine.</value>
   </data>
 </root>
