@@ -191,6 +191,32 @@ public sealed class RDWebKeptMachinesTests
 
     [TestMethod]
     [Timeout(600_000, CooperativeCancellation = true)]
+    public async Task ARequestThatWaitsForAMachineThatThenEnds_ReachesNone()
+    {
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        // the request that makes the machine ends it, with an End statement, once the test releases it.
+        var machine = new ScriptedMachine(async (_, _) =>
+        {
+            entered.TrySetResult();
+            await release.Task;
+            return ProgramInvocationResult.Ended(ExecutionOutcome.Halted, "End.");
+        });
+        await using var kept = new RDWebKeptMachines(new ScriptedProgram(() => machine), Options);
+        var first = MakeAsync(kept);
+        await entered.Task.WaitAsync(Token);
+
+        var waiting = InvokeAsync(kept);
+        release.SetResult();
+        await first;
+
+        Assert.AreEqual(RDWebKeptMachineStatus.NoMachine, (await waiting).Status);
+        Assert.HasCount(1, machine.Invocations);
+    }
+
+    [TestMethod]
+    [Timeout(600_000, CooperativeCancellation = true)]
     public async Task AMachineWhoseInvocationThrows_IsDisposed_AndItsKeyHasNoMachine()
     {
         var calls = 0;
