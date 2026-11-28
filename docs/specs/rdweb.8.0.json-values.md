@@ -118,7 +118,7 @@ A key or a member that does not match is handled by default as the table says. A
 |Case|Default|Option|Error when it raises|
 |---|---|---|---|
 |A key that names no public member, or a `Friend` or a `Private` one|Ignored.|`UnknownMembers`|438 (Object doesn't support this property or method).|
-|A key that names a method|Ignored.|`UnknownMembers`|450 (Wrong number of arguments or invalid property assignment).|
+|A key that names a method, or a `Property Let` or `Set` that takes arguments besides its value|Ignored.|`UnknownMembers`|450 (Wrong number of arguments or invalid property assignment).|
 |A key that names a `Property Get` with no `Let` or `Set`|Ignored, so a client that echoes back what it was given is not refused.|`ReadOnlyMembers`|451 (Property let procedure not defined and property get procedure did not return an object).|
 |A member that can be given a value and that no key names|Keeps its value.|`MissingMembers`|449 (Argument not optional).|
 
