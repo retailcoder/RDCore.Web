@@ -289,6 +289,7 @@ public sealed class RDWebKeptMachinesTests
         });
         await using var kept = new RDWebKeptMachines(new ScriptedProgram(() => machine), options, time);
         await MakeAsync(kept);
+        Assert.AreEqual(1, kept.Count, "the machine is kept, for the request that holds it");
 
         var request = InvokeAsync(kept);
         await entered.Task.WaitAsync(Token);
