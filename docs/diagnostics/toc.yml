@@ -6,3 +6,5 @@
   href: rdw00003.md
 - name: "RDW00005: Duplicate service name"
   href: rdw00005.md
+- name: "RDW00006: Factory parameter not an object"
+  href: rdw00006.md

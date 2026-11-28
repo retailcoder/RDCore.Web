@@ -39,6 +39,7 @@ internal sealed class RDWebExtensionApp(
     // every analyzer of the extension, which the handler runs on each document.
     public static IReadOnlyList<IModuleAnalyzer> Analyzers { get; } = [
         new ImplicitBodyBindingAnalyzer(), new SeveralBodyParametersAnalyzer(), new MemberNotRoundTrippedAnalyzer(),
+        new NonObjectFactoryParameterAnalyzer(),
     ];
 
     protected override void ConfigureHandlers(IRDCoreLSPHandlerConfigurationBuilder builder) => builder.WithHandler<AnalyzerDiagnosticsHandler>();
