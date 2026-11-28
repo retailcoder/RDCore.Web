@@ -1,0 +1,39 @@
+{
+  "Version": "0.1.0",
+  "Configuration": [],
+  "ProjectInfo": {
+    "Name": "RDWebTests",
+    "Modules": [
+      {
+        "RelativeUri": "BuilderTests.bas"
+      },
+      {
+        "RelativeUri": "Check.bas"
+      },
+      {
+        "RelativeUri": "HookedController.cls"
+      },
+      {
+        "RelativeUri": "PlainController.cls"
+      },
+      {
+        "RelativeUri": "Program.bas"
+      },
+      {
+        "RelativeUri": "RequestContextTests.bas"
+      },
+      {
+        "RelativeUri": "ResultsTests.bas"
+      }
+    ],
+    "References": [
+      {
+        "Name": "RDWeb",
+        "IsProject": true
+      }
+    ],
+    "OtherFiles": [],
+    "Folders": [],
+    "PrecompilerConstants": {}
+  }
+}

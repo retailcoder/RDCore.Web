@@ -1,0 +1,58 @@
+{
+  "Version": "0.1.0",
+  "Configuration": [],
+  "ProjectInfo": {
+    "Name": "RDWeb",
+    "Modules": [
+      {
+        "RelativeUri": "AuthenticationBuilder.cls"
+      },
+      {
+        "RelativeUri": "AuthorizationBuilder.cls"
+      },
+      {
+        "RelativeUri": "ClaimsUser.cls"
+      },
+      {
+        "RelativeUri": "Configuration.cls"
+      },
+      {
+        "RelativeUri": "IController.cls"
+      },
+      {
+        "RelativeUri": "IErrorHook.cls"
+      },
+      {
+        "RelativeUri": "IRequestHook.cls"
+      },
+      {
+        "RelativeUri": "Internals.bas"
+      },
+      {
+        "RelativeUri": "RequestContext.cls"
+      },
+      {
+        "RelativeUri": "Requests.bas"
+      },
+      {
+        "RelativeUri": "Result.cls"
+      },
+      {
+        "RelativeUri": "Results.bas"
+      },
+      {
+        "RelativeUri": "ServiceCollection.cls"
+      },
+      {
+        "RelativeUri": "Startup.bas"
+      },
+      {
+        "RelativeUri": "WebApplicationBuilder.cls"
+      }
+    ],
+    "References": [],
+    "OtherFiles": [],
+    "Folders": [],
+    "PrecompilerConstants": {}
+  }
+}
