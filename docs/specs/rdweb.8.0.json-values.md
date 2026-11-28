@@ -1,12 +1,8 @@
 # 8.0 JSON Values
 
 An endpoint passes a procedure's arguments as JSON and receives its returned value as JSON. This chapter defines how a VBA value and a JSON value convert
-to each other. It is an RD-VBA addition with no MS-VBAL counterpart.
-
-> [!NOTE]
-> **Not implemented.** An endpoint passes the procedure's name and its JSON arguments to a machine, but no machine runs the procedure in an RDCore runtime
-> session. So no endpoint's invocation converts its arguments or its value. VBA code that references the [`RDJson` library](#85-the-rdjson-library)
-> runs the same conversions.
+to each other. It is an RD-VBA addition with no MS-VBAL counterpart. VBA code that references the [`RDJson` library](#85-the-rdjson-library) runs the
+same conversions.
 
 A value that does not convert, in either direction, is run-time error 13 (Type mismatch), unless a row below names another error.
 

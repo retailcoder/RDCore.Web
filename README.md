@@ -12,7 +12,7 @@ This repository is for **RDCore.Web**, the web framework of [RDCore](https://git
 The RD-VBA language model comes from the [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK) package. What you build with RDCore.Web is yours (see [NOTICE.md](NOTICE.md)). The documentation is on the [RDCore.Web site](https://rubberduck-vba.github.io/RDCore.Web/).
 
 ## Project Status
-RDCore.Web maps the endpoints of an application and serves them through ASP.NET Core. It reads the endpoints from the annotations in a module's source. It does not run RD-VBA code: no machine of the pool runs a procedure in an RDCore runtime session.
+RDCore.Web maps the endpoints of an application and serves them through ASP.NET Core. It reads the endpoints from the annotations in a module's source, and its host runs the program that `rdc compose` writes of a project: each machine is an RDCore runtime session of that program.
 
 | Part | Status |
 |---|---|
@@ -22,7 +22,7 @@ RDCore.Web maps the endpoints of an application and serves them through ASP.NET 
 | Diagnostics of the body binding: [RDW00001](docs/diagnostics/rdw00001.md) where no `'@FromBody` names the body's parameter, with a quick fix that adds it, and [RDW00002](docs/diagnostics/rdw00002.md) at each further parameter of a `POST` that its route does not bind | Works, in an RDCore platform that loads the RDWeb extension. |
 | A diagnostic of the objects of a class that an action takes or returns: [RDW00003](docs/diagnostics/rdw00003.md) at the body's parameter or the action's name, naming each member that does not come back as it went out through JSON | Works, in an RDCore platform that loads the RDWeb extension. |
 | Responses: the procedure's value as JSON (`200`), no value (`204`), a run-time error as `500` with a problem details body (RFC 9457) that holds the error's number and code | Works. |
-| The host: a page in `wwwroot` that calls an endpoint and shows its answer | Works. The host maps no endpoint. |
+| The host: the program of a composition (`--RDWeb:Composition`), its endpoints served by a pool and by kept machines, the files of its web root, and the external host of its own machines | Works for the procedures of standard modules. A machine does not run the procedure of a class module. |
 
 The annotations of a controller module:
 
@@ -39,7 +39,7 @@ Public Function Hello(ByVal name As Variant) As Variant
 End Function
 ```
 
-`Hello` is the endpoint `GET /api/hello/{name}`, and its route binds `name`. Running it, and answering with its `Dictionary` as a JSON object, take a machine that runs RD-VBA code, which RDCore.Web does not have.
+`Hello` is the endpoint `GET /api/hello/{name}`, and its route binds `name`. The host serves it from the composition of its project ([Hosting](https://rubberduck-vba.github.io/RDCore.Web/specs/rdweb.7.0.hosting.html#72-the-rdcoreweb-host)).
 
 ## The solution
 

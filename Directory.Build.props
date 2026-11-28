@@ -6,6 +6,9 @@
     <!-- the RDCore.SDK package every project builds on, which brings the RDCore.SDK.Protocols package it depends on: one version for all of them. A build
          on a package that is not published passes its version and feed, as -p:RDCoreSdkVersion and -p:RestoreConfigFile. -->
     <RDCoreSdkVersion>0.2.4-alpha</RDCoreSdkVersion>
+    <!-- the RDCore.Runtime.Hosting package the host loads a composition with. A build on a package that is not published passes its version and feed, as
+         -p:RDCoreHostingVersion and -p:RestoreConfigFile. -->
+    <RDCoreHostingVersion>0.2.8-alpha</RDCoreHostingVersion>
     <!-- the .NET RDCore.SDK targets: the latest. -->
     <TargetFramework>net11.0</TargetFramework>
     <LangVersion>latest</LangVersion>

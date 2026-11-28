@@ -11,10 +11,6 @@ that implement it. The API reference documents those types.
 RD-VBA itself is described by [**RD-VBAL**](https://rubberduck-vba.github.io/RDCore/specs/rd-vbal.html), and VBA by
 [**MS-VBAL**](https://learn.microsoft.com/en-us/openspecs/microsoft_general_purpose_programming_languages/ms-vbal/d5418146-0bd2-45eb-9c7a-fd9502722c74).
 
-> [!NOTE]
-> **Not implemented.** No RD-VBA procedure runs end to end. RDCore.Web reads the endpoints from their annotations, binds a request's values and answers
-> with what a machine returns, but no machine runs a procedure in an RDCore runtime session.
-
 ---
 ## The site
 

@@ -8,8 +8,8 @@ The endpoints of a controller with `'@KeptMachine` run on kept machines instead 
 requests share that machine's state, one request at a time.
 
 > [!NOTE]
-> **Not implemented.** The RDCore.Web host composes no program ([§7.2](rdweb.7.0.hosting.md#72-the-rdcoreweb-host)), so no machine runs an RD-VBA
-> procedure. The pool runs the machines of the program an application gives it.
+> **Not implemented.** A machine runs the procedures of standard modules only: the procedure of a class module's endpoint is not found
+> ([§5.3](rdweb.5.0.responses.md#53-other-outcomes)).
 
 ---
 ## 6.1 The Machine Pool
