@@ -27,6 +27,15 @@ jobs:
    - name: Build (Debug)
      run: dotnet build RDCore.Web.slnx --configuration Debug
 
+   # restore already fails on an advisory (Directory.Build.props); this lists every vulnerable package, the transitive ones included, by name.
+   - name: Vulnerable packages
+     run: |
+       dotnet list RDCore.Web.slnx package --vulnerable --include-transitive | tee vulnerable.txt
+       if grep -q "has the following vulnerable packages" vulnerable.txt; then
+         echo "::error::A package RDCore.Web uses has a known vulnerability: bump it to a patched version."
+         exit 1
+       fi
+
    - name: Test (Debug)
      run: dotnet test RDCore.Web.slnx --configuration Debug --no-build --verbosity normal --blame-hang-timeout 10m
 
@@ -59,3 +68,19 @@ jobs:
        **/TestResults/**/*.dmp
       if-no-files-found: ignore
       retention-days: 3
+
+ # a pull request that adds or bumps a package with a known vulnerability, of any severity, fails here. It needs the repository's dependency graph.
+ dependency-review:
+  if: github.event_name == 'pull_request'
+  runs-on: ubuntu-latest
+  timeout-minutes: 10
+
+  steps:
+   - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+     with:
+      persist-credentials: false
+
+   - name: Dependency review
+     uses: actions/dependency-review-action@bbc44d14a204704ccc493733616cd1e93a0321ec # v5.0.1
+     with:
+      fail-on-severity: low
