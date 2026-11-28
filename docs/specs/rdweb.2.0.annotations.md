@@ -8,6 +8,9 @@ to VBA they are comments, so an annotated module compiles as it is.
 
 [`RDWebEndpointReader`](xref:RDCore.Web.Endpoints.RDWebEndpointReader) reads a module's endpoints from the annotations of its parse.
 
+The RDWeb extension declares these annotations in its manifest, with a description of each one and of its argument in English and French: the platform
+knows them, and where each one is legal, without starting the extension.
+
 > [!NOTE]
 > **Not implemented.** The RDCore.Web host reads no module: it maps no endpoint.
 

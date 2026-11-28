@@ -1,5 +1,6 @@
 using RDCore.SDK.Client;
 using RDCore.SDK.Extensibility;
+using RDCore.SDK.Extensibility.Annotations;
 using RDCore.SDK.Server.Configuration;
 using RDCore.Web.Diagnostics;
 using RDCore.Web.Host;
@@ -12,6 +13,9 @@ using System.Runtime.CompilerServices;
 
 // its diagnostics are reported under RDW codes, and each code has a page under RDCore.Web's documentation.
 [assembly: DiagnosticPrefix(RDWebDiagnostics.Prefix, HelpBaseUri = RDWebDiagnostics.HelpBaseUri)]
+
+// the annotations it provides, which `rdc describe-ext` writes into its manifest with their descriptions.
+[assembly: ExtensionAnnotations(typeof(RDWebAnnotationDeclarations), RDWebAnnotationDeclarations.DescriptionsResource)]
 
 // started by the platform, with the pipe it names, the host is the RDWeb extension; started otherwise, it serves the application.
 if (SdkCommandLine.IsServerLaunch(args))

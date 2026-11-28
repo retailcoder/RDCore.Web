@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Controller" xml:space="preserve">
+    <value>Fait du module un contrôleur : chacune de ses procédures publiques qui a une annotation de méthode HTTP sert un point de terminaison.</value>
+  </data>
+  <data name="Controller_Route" xml:space="preserve">
+    <value>La route qui préfixe les routes des points de terminaison du module. Sans elle, le nom du module sans le suffixe Controller.</value>
+  </data>
+  <data name="KeptMachine" xml:space="preserve">
+    <value>Exécute chaque requête au contrôleur sur la machine gardée pour la valeur d'un paramètre de route, qui n'est jamais réinitialisée.</value>
+  </data>
+  <data name="KeptMachine_Key" xml:space="preserve">
+    <value>Le paramètre de route dont la valeur est la clé de la machine.</value>
+  </data>
+  <data name="HttpGet" xml:space="preserve">
+    <value>Sert la procédure pour la méthode HTTP GET.</value>
+  </data>
+  <data name="HttpGet_Route" xml:space="preserve">
+    <value>La route du point de terminaison, sous celle du contrôleur.</value>
+  </data>
+  <data name="HttpPost" xml:space="preserve">
+    <value>Sert la procédure pour la méthode HTTP POST : le corps JSON de la requête se lie à l'un de ses paramètres.</value>
+  </data>
+  <data name="HttpPost_Route" xml:space="preserve">
+    <value>La route du point de terminaison, sous celle du contrôleur.</value>
+  </data>
+  <data name="FromBody" xml:space="preserve">
+    <value>Nomme le paramètre auquel se lie le corps JSON de la requête.</value>
+  </data>
+  <data name="FromBody_Parameter" xml:space="preserve">
+    <value>Le nom d'un paramètre de la procédure.</value>
+  </data>
+  <data name="NewMachine" xml:space="preserve">
+    <value>Crée la machine de la clé de la requête avant que la procédure s'exécute, dans un contrôleur qui a '@KeptMachine.</value>
+  </data>
+</root>

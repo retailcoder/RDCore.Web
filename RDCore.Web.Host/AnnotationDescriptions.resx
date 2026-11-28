@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Controller" xml:space="preserve">
+    <value>Makes the module a controller: each of its public procedures with an HTTP method annotation serves an endpoint.</value>
+  </data>
+  <data name="Controller_Route" xml:space="preserve">
+    <value>The route that prefixes the routes of the module's endpoints. Without it, the module's name less a Controller suffix.</value>
+  </data>
+  <data name="KeptMachine" xml:space="preserve">
+    <value>Runs each request to the controller on the machine kept for the value of a route parameter, which is never reset.</value>
+  </data>
+  <data name="KeptMachine_Key" xml:space="preserve">
+    <value>The route parameter whose value is the machine's key.</value>
+  </data>
+  <data name="HttpGet" xml:space="preserve">
+    <value>Serves the procedure for the HTTP GET method.</value>
+  </data>
+  <data name="HttpGet_Route" xml:space="preserve">
+    <value>The endpoint's route, under the controller's.</value>
+  </data>
+  <data name="HttpPost" xml:space="preserve">
+    <value>Serves the procedure for the HTTP POST method: the request's JSON body binds to one of its parameters.</value>
+  </data>
+  <data name="HttpPost_Route" xml:space="preserve">
+    <value>The endpoint's route, under the controller's.</value>
+  </data>
+  <data name="FromBody" xml:space="preserve">
+    <value>Names the parameter that the request's JSON body binds to.</value>
+  </data>
+  <data name="FromBody_Parameter" xml:space="preserve">
+    <value>The name of a parameter of the procedure.</value>
+  </data>
+  <data name="NewMachine" xml:space="preserve">
+    <value>Makes the machine of the request's key before the procedure runs, in a controller with '@KeptMachine.</value>
+  </data>
+</root>
