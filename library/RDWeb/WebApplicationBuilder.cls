@@ -49,7 +49,7 @@ Public Property Get Configuration() As Configuration
     Set Configuration = mConfiguration
 End Property
 
-'@Description("Runs filter, a Module.Function, before each controller, in the order added: given the RequestContext, it returns Nothing or a result.")
+'@Description("Adds filter, a Module.Function that runs before each controller, in the order filters are added. It is given the RequestContext, and returns Nothing to let the request go on or a result that ends it.")
 Public Sub UseFilter(ByVal filter As String)
     RequireName filter, "WebApplicationBuilder.UseFilter"
     mFilters.Add filter

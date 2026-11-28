@@ -16,7 +16,7 @@ Private Sub Class_Initialize()
     Set mPolicies = New Collection
 End Sub
 
-'@Description("Adds a policy a user meets with the role RequiredRole and the claim RequiredClaim, of the value ClaimValue if given. Neither one is error 5.")
+'@Description("Adds a policy a user meets with the role RequiredRole and the claim RequiredClaim, of the value ClaimValue if given. Raises error 5 when name is empty, when neither is given, or when ClaimValue is given without RequiredClaim.")
 Public Sub AddPolicy(ByVal name As String, Optional ByVal RequiredRole As String, Optional ByVal RequiredClaim As String, Optional ByVal ClaimValue As String)
     RequireName name, "AuthorizationBuilder.AddPolicy"
     If LenB(RequiredRole) = 0 And LenB(RequiredClaim) = 0 Then Err.Raise 5, "AuthorizationBuilder.AddPolicy"

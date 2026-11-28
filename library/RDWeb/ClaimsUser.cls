@@ -51,7 +51,7 @@ Public Property Get Name() As String
     Name = mName
 End Property
 
-'@Description("The value of the user's first claim of a type, such as email; an empty string when the user has none. Claim types are compared with their case.")
+'@Description("The value of the user's first claim of a type, such as email; an empty string when the user has none. Claim types are case-sensitive.")
 Public Function Claim(ByVal claimType As String) As String
     Dim item As Variant
     For Each item In mClaims
@@ -62,7 +62,7 @@ Public Function Claim(ByVal claimType As String) As String
     Next
 End Function
 
-'@Description("Whether the user has a role: a claim of the type role whose value is the role, compared with its case.")
+'@Description("Whether the user has a role: a claim of the type role whose value is the role. Roles are case-sensitive.")
 Public Function IsInRole(ByVal role As String) As Boolean
     Dim item As Variant
     For Each item In mClaims

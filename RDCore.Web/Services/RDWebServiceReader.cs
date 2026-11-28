@@ -14,7 +14,7 @@ namespace RDCore.Web.Services;
 /// A service's name is the type a parameter declares to be given it: the annotation's first argument, or the class's own name without one. The class is that
 /// type, or names it in an <c>Implements</c> statement (<strong>MS-VBAL §5.2.4.2</strong>). Its lifetime is the second argument, <c>Scoped</c>,
 /// <c>Transient</c> or <c>Singleton</c> in any case, and <c>Scoped</c> without one. Names are compared without regard to case, as VBA names are
-/// (<strong>MS-VBAL §3.3.5.1</strong>).
+/// (<strong>MS-VBAL §3.3.5</strong>).
 /// </remarks>
 public static class RDWebServiceReader
 {

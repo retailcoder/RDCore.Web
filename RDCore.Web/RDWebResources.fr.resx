@@ -94,16 +94,16 @@
     <value>Aucune autre machine ne peut être gardée.</value>
   </data>
   <data name="Service_NotAClass" xml:space="preserve">
-    <value>Le module {0} a une annotation &apos;@Service, et seul un module de classe est un service.</value>
+    <value>Le module {0} a une annotation &apos;@Service, mais seul un module de classe peut être un service.</value>
   </data>
   <data name="Service_UnknownLifetime" xml:space="preserve">
     <value>Le service de la classe {0} a la durée de vie &apos;{1}&apos; : un service est Scoped, Transient ou Singleton.</value>
   </data>
   <data name="Service_NotItsType" xml:space="preserve">
-    <value>La classe {0} est le service {1}, et elle n&apos;est pas {1} : elle n&apos;implémente pas {1}. Nommez le nom de la classe elle-même, ou ajoutez Implements {1}.</value>
+    <value>La classe {0} est déclarée comme le service {1}, et n&apos;implémente pas {1}. Déclarez le nom de la classe elle-même, ou ajoutez Implements {1} à la classe.</value>
   </data>
   <data name="Service_DuplicateName" xml:space="preserve">
-    <value>Les classes {0} et {1} sont toutes deux le service {2} (RDW00005). Donnez un autre nom à l&apos;une d&apos;elles.</value>
+    <value>Les classes {0} et {1} déclarent toutes deux le nom de service {2} (RDW00005). Donnez un autre nom à l&apos;une d&apos;elles.</value>
   </data>
   <data name="NonObjectFactoryParameter_Message" xml:space="preserve">
     <value>Le paramètre &apos;{0}&apos; de la fabrique {1} n&apos;est pas d&apos;un type objet : chaque paramètre d&apos;une fabrique reçoit un service, et un service est un objet. Déclarez-le comme la classe ou l&apos;interface du service.</value>

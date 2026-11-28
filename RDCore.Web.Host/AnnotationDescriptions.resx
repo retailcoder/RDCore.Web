@@ -46,18 +46,18 @@
     <value>Creates the machine of the request's key, then runs the procedure on it. Legal only in a controller with '@KeptMachine.</value>
   </data>
   <data name="ControllerFactory" xml:space="preserve">
-    <value>Names the function that makes a controller for each request, run on the class's default instance with its parameters given as services. Without it, the function is Create.</value>
+    <value>Names the function that creates the controller of each request. It runs on the class's default instance, and each of its parameters is given a service. Without this annotation, the function is Create.</value>
   </data>
   <data name="ControllerFactory_Factory" xml:space="preserve">
     <value>The name of a public function of the class that returns the controller.</value>
   </data>
   <data name="Service" xml:space="preserve">
-    <value>Makes the class a service: a parameter declared as its name is given an object of the class, a New one, or the one its Create function returns when the class has a default instance.</value>
+    <value>Makes the class a service: a parameter declared as the service's name is given an object of the class, a New one or, when the class has a default instance, the one its Create function returns.</value>
   </data>
   <data name="Service_Name" xml:space="preserve">
-    <value>The service's name: the type a parameter declares to be given it, which the class is or implements. Without it, the class's own name.</value>
+    <value>The service's name: the type a parameter declares to be given it, which the class is or implements. When it is omitted, the class's own name.</value>
   </data>
   <data name="Service_Lifetime" xml:space="preserve">
-    <value>Scoped (one object per request), Transient (one per parameter) or Singleton (one per machine). Without it, Scoped.</value>
+    <value>Scoped (one object per request), Transient (one per parameter) or Singleton (one per machine). When it is omitted, Scoped.</value>
   </data>
 </root>
