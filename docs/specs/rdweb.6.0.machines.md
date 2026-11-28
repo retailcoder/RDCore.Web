@@ -7,9 +7,10 @@ requests never share that state, and a procedure needs no locks. Requests run at
 The endpoints of a controller with `'@KeptMachine` run on kept machines instead ([§6.2](#62-kept-machines)): each key has a machine of its own, and its
 requests share that machine's state, one request at a time.
 
-> [!NOTE]
-> **Not implemented.** A machine runs the procedures of standard modules only: the procedure of a class module's endpoint is not found
-> ([§5.3](rdweb.5.0.responses.md#53-other-outcomes)).
+The procedure of a class module runs on a new instance of the class, made for its request as `New` makes one: `Class_Initialize` runs before the
+procedure, and `Class_Terminate` once its value is converted to JSON. A class whose `VB_PredeclaredId` is `True` is no exception: its default instance
+is not used. An error that `Class_Initialize` does not handle is the request's run-time error ([§5.2](rdweb.5.0.responses.md#52-run-time-errors)), and
+the procedure does not run. State that outlives a request lives in a standard module, on a kept machine.
 
 ---
 ## 6.1 The Machine Pool
