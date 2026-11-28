@@ -12,7 +12,7 @@ Ce dépôt est celui de **RDCore.Web**, le cadriciel web de [RDCore](https://git
 Le modèle du langage RD-VBA vient du paquet [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK). Ce que vous construisez avec RDCore.Web vous appartient (voir [NOTICE.md](NOTICE.md)). La documentation est sur le [site de RDCore.Web](https://rubberduck-vba.github.io/RDCore.Web/index.fr.html).
 
 ## État du projet
-RDCore.Web associe les points de terminaison d'une application à leurs routes et les sert au moyen d'ASP.NET Core. Il lit les points de terminaison dans les annotations de la source d'un module. Il n'exécute pas de code RD-VBA : aucune machine du bassin n'exécute une procédure dans une session d'exécution RDCore.
+RDCore.Web associe les points de terminaison d'une application à leurs routes et les sert au moyen d'ASP.NET Core. Il lit les points de terminaison dans les annotations de la source d'un module, et son hôte exécute le programme que `rdc compose` écrit d'un projet : chaque machine est une session d'exécution RDCore de ce programme.
 
 | Partie | État |
 |---|---|
@@ -22,7 +22,7 @@ RDCore.Web associe les points de terminaison d'une application à leurs routes e
 | Les diagnostics de la liaison du corps : [RDW00001](docs/diagnostics/rdw00001.md) là où aucun `'@FromBody` ne nomme le paramètre du corps, avec un correctif rapide qui l'ajoute, et [RDW00002](docs/diagnostics/rdw00002.md) à chaque autre paramètre d'un `POST` que sa route ne lie pas | Fonctionne, dans une plateforme RDCore qui charge l'extension RDWeb. |
 | Un diagnostic des objets d'une classe qu'une action reçoit ou retourne : [RDW00003](docs/diagnostics/rdw00003.md) au paramètre du corps ou au nom de l'action, qui nomme chaque membre qui ne revient pas tel qu'il part en JSON | Fonctionne, dans une plateforme RDCore qui charge l'extension RDWeb. |
 | Les réponses : la valeur de la procédure en JSON (`200`), aucune valeur (`204`), une erreur d'exécution en `500` avec un corps de détails du problème (RFC 9457) qui contient le numéro et le code de l'erreur | Fonctionne. |
-| L'hôte : une page dans `wwwroot` qui appelle un point de terminaison et montre sa réponse | Fonctionne. L'hôte n'associe aucun point de terminaison. |
+| L'hôte : le programme d'une composition (`--RDWeb:Composition`), ses points de terminaison servis par un bassin et par des machines gardées, les fichiers de sa racine web, et l'hôte externe de ses propres machines | Fonctionne pour les procédures des modules standards. Une machine n'exécute pas la procédure d'un module de classe. |
 
 Les annotations d'un module contrôleur :
 
@@ -39,7 +39,7 @@ Public Function Hello(ByVal name As Variant) As Variant
 End Function
 ```
 
-`Hello` est le point de terminaison `GET /api/hello/{name}`, et sa route lie `name`. Pour l'exécuter et répondre avec son `Dictionary` en objet JSON, il faut une machine qui exécute du code RD-VBA, ce que RDCore.Web n'a pas.
+`Hello` est le point de terminaison `GET /api/hello/{name}`, et sa route lie `name`. L'hôte le sert à partir de la composition de son projet ([Hébergement](https://rubberduck-vba.github.io/RDCore.Web/specs/rdweb.7.0.hosting.html#72-the-rdcoreweb-host)).
 
 ## La solution
 

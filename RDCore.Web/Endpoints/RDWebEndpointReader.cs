@@ -2,6 +2,8 @@ using RDCore.SDK.Model;
 using RDCore.SDK.Model.AST;
 using RDCore.SDK.Model.AST.Abstract;
 using RDCore.SDK.Model.AST.Declarations;
+using RDCore.SDK.Runtime.Hosting;
+using RDCore.SDK.Workspace;
 using System.Collections.Immutable;
 
 namespace RDCore.Web.Endpoints;
@@ -18,7 +20,7 @@ public static class RDWebEndpointReader
     /// The endpoints a module declares.
     /// </summary>
     /// <param name="parse">
-    /// The module's parse; for a file that has blocks, the parse of the one module (<see cref="SDK.Workspace.RDCoreDocument.ParseOf"/>).
+    /// The module's parse; for a file that has blocks, the parse of the one module (<see cref="RDCoreDocument.ParseOf"/>).
     /// </param>
     /// <param name="moduleName">The module's name.</param>
     /// <returns>
@@ -30,6 +32,22 @@ public static class RDWebEndpointReader
     /// </exception>
     public static ImmutableArray<RDWebEndpoint> Read(ModuleParseResult parse, string moduleName)
         => [.. Actions(parse, moduleName).SelectMany(action => action.Annotations.Select(action.EndpointOf))];
+
+    /// <summary>
+    /// The endpoints every module of a program declares: the modules of its documents (<see cref="IComposedProgram.Documents"/>), each file's own module
+    /// and the module of each of its blocks (<see cref="RDCoreDocument.ModuleUris"/>), each named as RD-VBA names it (<see cref="RDCoreDocument.NameOf"/>).
+    /// </summary>
+    /// <param name="program">The program.</param>
+    /// <returns>The endpoints of each module (<see cref="Read(ModuleParseResult, string)"/>), in the order of the documents and of their modules.</returns>
+    /// <exception cref="RDWebEndpointException">
+    /// An annotation declares an endpoint that cannot be served (<see cref="RDWebEndpoint.FromAnnotation"/>).
+    /// </exception>
+    public static ImmutableArray<RDWebEndpoint> Read(IComposedProgram program)
+    {
+        ArgumentNullException.ThrowIfNull(program);
+        return [.. program.Documents.SelectMany(document => document.ModuleUris.SelectMany(module
+            => document.ParseOf(module) is { } parse && document.NameOf(module) is { } name ? Read(parse, name) : []))];
+    }
 
     // each public procedure of a controller module that an HTTP method annotation serves, in the order they are written; none for a module that is not a
     // controller. What the host serves and what the diagnostics say of an action are both read here.

@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RDCore.Web\RDCore.Web.csproj" />
+    <PackageReference Include="RDCore.Runtime.Hosting" Version="$(RDCoreHostingVersion)" />
   </ItemGroup>
 
   <!-- the build output holds wwwroot as a publish does, so that an application whose content root is its output folder serves it: the tests' does. -->

@@ -15,10 +15,6 @@ answers with a problem details body (RFC 9457, media type `application/problem+j
 A request to an endpoint that keeps machines answers `404`, `409` or `503` when it reaches no machine, and `204` when the procedure ends its machine with
 an `End` statement ([§6.2](rdweb.6.0.machines.md#62-kept-machines)).
 
-> [!NOTE]
-> **Not implemented.** No machine runs a procedure in an RDCore runtime session, so no RD-VBA procedure gives these outcomes. They are what RDCore.Web
-> answers with a machine's result.
-
 ---
 ## 5.1 Returned Values
 

@@ -1,3 +1,4 @@
+using RDCore.Runtime.Hosting;
 using RDCore.SDK.Client;
 using RDCore.SDK.Extensibility;
 using RDCore.SDK.Server.Configuration;
@@ -13,6 +14,12 @@ using System.Runtime.CompilerServices;
 // its diagnostics are reported under RDW codes, and each code has a page under RDCore.Web's documentation.
 [assembly: DiagnosticPrefix(RDWebDiagnostics.Prefix, HelpBaseUri = RDWebDiagnostics.HelpBaseUri)]
 
+// started as the external host of its own machines, it is that and nothing else, on the process's main thread: before the first await.
+if (ProgramExternalHost.IsThisProcess)
+{
+    return ProgramExternalHost.Run(args);
+}
+
 // started by the platform, with the pipe it names, the host is the RDWeb extension; started otherwise, it serves the application.
 if (SdkCommandLine.IsServerLaunch(args))
 {
@@ -20,5 +27,6 @@ if (SdkCommandLine.IsServerLaunch(args))
     return await extension.RunAsync(args);
 }
 
-RDWebHostApplication.Create(new WebApplicationOptions { Args = args }).Run();
+await using var host = await RDWebHostApplication.CreateAsync(new WebApplicationOptions { Args = args }, CancellationToken.None);
+await host.Application.RunAsync();
 return 0;

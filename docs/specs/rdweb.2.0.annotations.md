@@ -6,10 +6,8 @@ for each key of a controller, and `'@NewMachine` makes it. They follow the comme
 [**RD-VBAL §3.0.1.1** Comment Annotations Syntax](https://rubberduck-vba.github.io/RDCore/specs/rd-vbal.3.0.1.token-semantics.html#3011-comment-annotations-syntax):
 to VBA they are comments, so an annotated module compiles as it is.
 
-[`RDWebEndpointReader`](xref:RDCore.Web.Endpoints.RDWebEndpointReader) reads a module's endpoints from the annotations of its parse.
-
-> [!NOTE]
-> **Not implemented.** The RDCore.Web host reads no module: it maps no endpoint.
+[`RDWebEndpointReader`](xref:RDCore.Web.Endpoints.RDWebEndpointReader) reads a module's endpoints from the annotations of its parse, or those of every
+module of a program.
 
 |Annotation|Kind|Written|Argument|
 |---|---|---|---|

@@ -166,10 +166,10 @@ public sealed class RDWebEndpointReaderTests
         Assert.ThrowsExactly<RDWebEndpointException>(() => RDWebEndpointReader.Read(parse, "Greetings"));
     }
 
-    [TestMethod]
-    public void InAFileOfBlocks_AControllerAnnotationAboveABlocksHeader_MakesThatBlocksModuleAController()
+    // a file of two blocks, Greetings a controller and Other not: 0-1 above Greetings' header; 2 the header; 3 above Hello; 4-6 Hello; 7 the end. 8
+    // Other's header; 9 above Bye; 10-11 Bye; 12 the end.
+    private static (RDCoreDocument Document, BlockModule Greetings, BlockModule Other) FileOfBlocks()
     {
-        // 0-1 above Greetings' header; 2 the header; 3 above Hello; 4-6 Hello; 7 the end. 8 Other's header; 9 above Bye; 10-11 Bye; 12 the end.
         BlockModule Block(string name, int header, int end, params SyntaxNode[] children)
             => new(name, ModuleType.StdModule, RDCoreDocument.BlockUri(File, name), new SourceRange(header, 0, end, 10),
                 new ModuleNode(Id(), Lines(header + 1, end), [.. children]));
@@ -188,12 +188,34 @@ public sealed class RDWebEndpointReaderTests
             ],
             BlockModules = [greetings, other],
         };
-        var document = new RDCoreDocument(File, parse);
+        return (new RDCoreDocument(File, parse), greetings, other);
+    }
+
+    [TestMethod]
+    public void InAFileOfBlocks_AControllerAnnotationAboveABlocksHeader_MakesThatBlocksModuleAController()
+    {
+        var (document, greetings, other) = FileOfBlocks();
 
         var endpoint = RDWebEndpointReader.Read(document.ParseOf(greetings.Uri)!, "Greetings").Single();
 
         Assert.AreEqual("GET /api/hello", $"{endpoint.HttpMethod} {endpoint.Route}", "an annotation above the header is no member's");
         Assert.IsEmpty(RDWebEndpointReader.Read(document.ParseOf(other.Uri)!, "Other"), "the controller is the block's below it only");
         Assert.IsEmpty(RDWebEndpointReader.Read(document.ParseOf(File)!, "Greetings"));
+    }
+
+    [TestMethod]
+    public void AProgramsEndpoints_AreThoseOfEveryModuleOfItsDocuments_BlocksIncluded_EachNamedAsItsDocumentNamesIt()
+    {
+        var orders = new Uri("file:///c:/app/Orders.bas");
+        var ordersParse = Parse([Procedure("Find", 3, 6, parameters: "id")],
+            Annotated(0, RDWebAnnotations.Controller, "api"), Annotated(2, RDWebAnnotations.HttpGet, "orders/{id}"));
+        var program = new ScriptedProgram(() => throw new AssertFailedException("reading the endpoints makes no machine"),
+            [new RDCoreDocument(orders, ordersParse), FileOfBlocks().Document]);
+
+        var endpoints = RDWebEndpointReader.Read(program);
+
+        var served = endpoints.Select(endpoint => $"{endpoint.HttpMethod} {endpoint.Route} {endpoint.ModuleName}.{endpoint.ProcedureName}").ToArray();
+        CollectionAssert.AreEqual(new[] { "GET /api/orders/{id} Orders.Find", "GET /api/hello Greetings.Hello" }, served,
+            "Orders is named by its file, which declares no VB_Name; Greetings by its block's header");
     }
 }
