@@ -36,7 +36,7 @@ public static class RDWebDiagnostics
 
     /// <summary>
     /// <c>RDW00005</c>: two classes of a program declare one <c>'@Service</c> name. The host refuses the program at startup
-    /// (<see cref="Services.RDWebServiceReader.Distinct"/>); no analyzer reports it in the editor.
+    /// (<see cref="Services.RDWebServiceReader.Distinct"/>), and <see cref="DuplicateServiceNameAnalyzer"/> reports it in the editor.
     /// </summary>
     public static RDCoreDiagnosticCode DuplicateServiceName { get; } = new(Prefix, 5);
 

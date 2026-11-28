@@ -14,7 +14,7 @@ namespace RDCore.Web.Diagnostics;
 /// <remarks>
 /// A service's name is the type a parameter declares to be given it, so a parameter declared as that type could be given an object of either class: the host
 /// refuses the program (<see cref="RDWebServiceReader.Distinct"/>). It is reported at the <c>'@Service</c> of each class that declares the name, as an error,
-/// with the others' as related locations. Names are compared without regard to case, as VBA names are (<strong>MS-VBAL §3.3.5.1</strong>). A
+/// with the others' as related locations. Names are compared without regard to case, as VBA names are (<strong>MS-VBAL §3.3.5</strong>). A
 /// <c>'@Service</c> that the host refuses for another reason (<see cref="RDWebServiceException"/>) declares no name here.
 /// </remarks>
 public sealed class DuplicateServiceNameAnalyzer : IProjectModulesAnalyzer

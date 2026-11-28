@@ -109,7 +109,7 @@
     <value>The parameter &apos;{0}&apos; of the factory {1} is not of an object type: each parameter of a factory is given a service, and a service is an object. Declare it as the service&apos;s class or interface.</value>
   </data>
   <data name="DuplicateServiceName_Message" xml:space="preserve">
-    <value>The service name &apos;{0}&apos; is also declared by {1}: a parameter declared as &apos;{0}&apos; could be given an object of either class. Keep it on one class.</value>
+    <value>The service name &apos;{0}&apos; is also declared by {1}: a parameter declared as &apos;{0}&apos; could be given an object of any of these classes. Keep it on one class.</value>
   </data>
   <data name="DuplicateServiceName_Related" xml:space="preserve">
     <value>The same service name, declared by {0}.</value>
