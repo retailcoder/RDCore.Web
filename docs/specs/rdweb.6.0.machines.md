@@ -53,7 +53,7 @@ Each deadline runs from the request's arrival, or from the start of a reset.
 |`RequestTimeout` and `StopTimeout`|The machine has not stopped|The pool abandons the machine and makes another. The request answers `500` as interrupted ([§5.3](rdweb.5.0.responses.md#53-other-outcomes)). The pool disposes the abandoned machine if it ever ends.|
 |`ResetTimeout`|The reset runs|The reset is cut short, and the machine is recycled. A machine that has not stopped `StopTimeout` later is abandoned.|
 
-A call outside the program, to a `Declare` procedure or a COM object, returns before the machine sees an interruption. A machine that waits on one past its
+A machine sees an interruption only once a call outside the program, to a `Declare` procedure or a COM object, returns. A machine that waits on one past its
 deadlines is abandoned.
 
 ---
