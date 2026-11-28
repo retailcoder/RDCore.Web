@@ -61,7 +61,7 @@
     <value>Scoped (un objet par requête), Transient (un par paramètre) ou Singleton (un par machine). Si elle est omise, Scoped.</value>
   </data>
   <data name="Authorize" xml:space="preserve">
-    <value>Ne laisse qu'un utilisateur connecté atteindre le contrôleur ou l'action. Une requête sans connexion est envoyée à la connexion et n'atteint jamais une machine.</value>
+    <value>Ne laisse qu'un utilisateur connecté atteindre le contrôleur ou l'action. Une requête d'un utilisateur qui n'est pas connecté est envoyée vers la connexion, et n'atteint jamais une machine.</value>
   </data>
   <data name="Authorize_Policy" xml:space="preserve">
     <value>Le nom d'une stratégie qu'ajoute Program.Run et que l'utilisateur doit satisfaire. S'il est omis, tout utilisateur connecté.</value>
