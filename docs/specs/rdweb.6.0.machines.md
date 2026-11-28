@@ -7,11 +7,17 @@ requests never share that state, and a procedure needs no locks. Requests run at
 The endpoints of a controller with `'@KeptMachine` run on kept machines instead ([§6.2](#62-kept-machines)): each key has a machine of its own, and its
 requests share that machine's state, one request at a time.
 
-The procedure of a class module runs on a new instance of the class, made for its request as `New` makes one: `Class_Initialize` runs before the
-procedure, and `Class_Terminate` once the procedure returns and its value is converted to JSON. An unhandled error or an
-`End` ends the run, and the run's end lets go of the instance. The same holds for a class whose `VB_PredeclaredId` is `True`: its default instance is not
-used. An error that `Class_Initialize` does not handle is the request's run-time error ([§5.2](rdweb.5.0.responses.md#52-run-time-errors)), and the
-procedure does not run. State that outlives a request lives in a standard module, on a kept machine.
+The procedure of a class module runs on an instance of the class:
+
+- **A class whose `VB_PredeclaredId` is `False`:** a new instance for each request, made as `New` makes one. `Class_Initialize` runs before the
+  procedure, and `Class_Terminate` once the procedure returns and its value is converted to JSON. An unhandled error or an `End` ends the run, and
+  the run's end lets go of the instance.
+- **A class whose `VB_PredeclaredId` is `True`:** its default instance, which is global state. On a kept machine, the default instance and its state
+  last from one request to the next, until the machine is disposed or the code sets it to `Nothing`. On a pool machine, the reset releases it, so each
+  request starts with a new one.
+
+An error that `Class_Initialize` does not handle is the request's run-time error ([§5.2](rdweb.5.0.responses.md#52-run-time-errors)), and the
+procedure does not run. State that outlives a request lives on a kept machine, in a standard module or in a predeclared class's default instance.
 
 ---
 ## 6.1 The Machine Pool
